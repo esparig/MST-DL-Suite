@@ -2,12 +2,13 @@
 Generation of train, validation, and test datasets
 """
 import os
+from pathlib import Path
 from collections import defaultdict
 import numpy as np
 from keras.utils import to_categorical
 
 
-def get_dataset(dataset_path, percent_train: int=80, percent_val: int=10,
+def get_dataset(dataset_path: Path, percent_train: int=80, percent_val: int=10,
                 percent_test: int=10, num_classes: int=9):
     """
     Returns filename and label lists of samples
@@ -18,6 +19,7 @@ def get_dataset(dataset_path, percent_train: int=80, percent_val: int=10,
 
     return (training_ds, training_labels, val_ds, val_labels, test_ds, test_labels)
     """
+    dataset_path = str(dataset_path) # TO DO: change everything to work with pathlib
     if (percent_train + percent_val + percent_test) != 100:
         percent_train, percent_val, percent_test = 80, 10, 10
         print("Default values for training/validation/test examples have been set (80/10/10)")
@@ -58,6 +60,7 @@ def get_dataset(dataset_path, percent_train: int=80, percent_val: int=10,
     test_ds_np = np.array(test_ds)[test_perm]
     test_labels_np = np.array(test_labels)[test_perm]
 
-    return (training_ds_np.tolist(), to_categorical(training_labels_np.tolist(), num_classes=num_classes),
+    return (training_ds_np.tolist(),
+            to_categorical(training_labels_np.tolist(), num_classes=num_classes),
             val_ds_np.tolist(), to_categorical(val_labels_np.tolist(), num_classes=num_classes),
             test_ds_np.tolist(), to_categorical(test_labels_np.tolist(), num_classes=num_classes))
