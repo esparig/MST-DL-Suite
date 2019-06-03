@@ -9,19 +9,19 @@ Date: 20190531
 """
 import os
 import argparse
+import datetime
 from pathlib import Path
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 from keras.optimizers import SGD
-from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.metrics import classification_report
 
-from multiscandllib.src.get_dataset import get_dataset
-from multiscandllib.src.custom_model import get_model
-from multiscandllib.src.data_generator import DataGenerator
-from multiscandllib.src.plot_graphics import plot_performance_graphics
+import sys
+sys.path.append('..')
+from src.get_dataset import get_dataset
+from src.custom_model import get_model
+from src.data_generator import DataGenerator
+from src.plot_graphics import plot_performance_graphics, plot_confusion_matrix
 
 
 def main():
@@ -29,17 +29,22 @@ def main():
     """
     # Argument Parser
     parser = argparse.ArgumentParser(description='Example DL training.')
-    parser.add_argument('dataset', metavar='Dataset Path', type=Path, nargs='+',
+    parser.add_argument('--dataset', metavar='Dataset Path', type=str,
                     help='a string with the dataset path')
-    parser.add_argument('batch_size', metavar='Batch size', type=Path, nargs='+',
+    parser.add_argument('--batch_size', metavar='Batch size', type=int,
                     help='an integer for the batch size')
-    parser.add_argument('epochs', metavar='Number of Epochs', type=Path, nargs='+',
+    parser.add_argument('--epochs', metavar='Number of Epochs', type=int,
                     help='an integer for the numer of epochs')
     args = parser.parse_args()
 
+    print("Executing:", parser.prog)
+    print("----------------------------------------")
+    print("Dataset:", args.dataset)
+    print("Batch Size:", args.batch_size)
+    print("Epochs:", args.epochs)
+
     # Get current script name
-    output_folder = parser.prog
-    print(output_folder)
+    output_folder = parser.prog[:-3]+".results"
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
@@ -102,28 +107,18 @@ def main():
             epochs=num_epochs,
             verbose=1)
 
-    # Plot performance grpahics
-    plot_performance_graphics(output_folder, custom_model, num_epochs)
+    # Plot performance graphics
+    plot_performance_graphics(custom_model.history, num_epochs, 
+                              output_folder=output_folder, show_figure=False)
 
     # Visualizing of confusion matrix
-    custom_model_pred = model.predict_generator(my_validation_batch_generator, verbose=1)
-    custom_model_predicted = np.argmax(custom_model_pred, axis=1)
-    custom_model_cm = confusion_matrix(np.argmax(y_val, axis=1), custom_model_predicted)
-
-    # classes_names = ['agostadograve', 'agostadoleve', 'granizo', 'molestadograve',
-    # 'molestadoleve', 'molino', 'morada', 'picadodemosca', 'primera']
-    classes_names = ['molestadograve', 'molestadoleve', 'primera']
-    custom_model_df_cm = pd.DataFrame(custom_model_cm, classes_names, classes_names)
-    plt.figure(figsize=(12, 8))
-    sns.set(font_scale=1)  # for label size
-    sns.heatmap(custom_model_df_cm, annot=True, annot_kws={"size": 10})  # font size
-    # plt.show()
-    plt.savefig(os.path.join(output_folder, "confusion_matrix.png"))
+    custom_model_predicted = plot_confusion_matrix(model, my_validation_batch_generator, y_val,
+                          ['molestadograve', 'molestadoleve', 'primera'], 
+                          output_folder=output_folder, show_figure=False)
 
     # Metrics: precision, recall, f1-score, support
     custom_model_report = classification_report(np.argmax(y_val, axis=1), custom_model_predicted)
-    # print(simpleBlocks_report)
-    with open(os.path.join(output_folder, 'out.txt'), 'w') as file:
+    with open(os.path.join(output_folder, str(datetime.datetime.now())+"_out.txt"), 'w') as file:
         file.write(custom_model_report)
 
 
