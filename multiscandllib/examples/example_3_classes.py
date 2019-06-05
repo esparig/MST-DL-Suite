@@ -108,12 +108,12 @@ def main():
             verbose=1)
 
     # Plot performance graphics
-    plot_performance_graphics(custom_model.history, num_epochs, 
+    plot_performance_graphics(custom_model.history, num_epochs,
                               output_folder=output_folder, show_figure=False)
 
     # Visualizing of confusion matrix
     custom_model_predicted = plot_confusion_matrix(model, my_validation_batch_generator, y_val,
-                          ['molestadograve', 'molestadoleve', 'primera'], 
+                          ['molestadograve', 'molestadoleve', 'primera'],
                           output_folder=output_folder, show_figure=False)
 
     # Metrics: precision, recall, f1-score, support
