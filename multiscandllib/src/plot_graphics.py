@@ -56,10 +56,10 @@ def plot_confusion_matrix(model, batch, labels, classes_names, output_folder=Non
                           save_figure=True, show_figure=True):
     """Plot confusion matrix
     """
-    model_pred = model.predict_generator(batch, verbose=1)
-    model_predicted = np.argmax(model_pred, axis=1)
-    model_cm = confusion_matrix(np.argmax(labels, axis=1), model_predicted)
-    model_df_cm = pd.DataFrame(model_cm, classes_names, classes_names)
+    model_predicted = np.argmax(model.predict_generator(batch, verbose=1), axis=1)
+    model_df_cm = pd.DataFrame(
+        confusion_matrix(np.argmax(labels, axis=1), model_predicted),
+        classes_names, classes_names)
 
     plt.figure(figsize=(12, 8))
     sns.set(font_scale=1)  # for label size
