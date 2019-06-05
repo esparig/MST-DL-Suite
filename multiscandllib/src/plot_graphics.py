@@ -37,7 +37,10 @@ def plot_performance_graphics(history, num_epochs,
     plt.figure(1)
     plt.plot(history['loss'],'r')
     plt.plot(history['val_loss'],'g')
-    plt.xticks(np.arange(0, num_epochs, num_epochs%10))
+    if num_epochs > 19:
+        plt.xticks(np.arange(0, num_epochs, num_epochs//10))
+    else:
+        plt.xticks(np.arange(0, num_epochs))
     plt.rcParams['figure.figsize'] = (8, 6)
     plt.xlabel("Num of Epochs")
     plt.ylabel("Loss")

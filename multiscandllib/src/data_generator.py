@@ -1,6 +1,7 @@
 """Data Generation for Keras.
 """
 import random
+from typing import List, Tuple
 import numpy as np
 from keras.utils import Sequence
 from scipy.ndimage import shift
@@ -10,21 +11,23 @@ class DataGenerator(Sequence):
     """Class Data Generator for Keras.
     """
 
-    def __init__(self, image_filenames, labels, batch_size, width_shift_range=0):
+    def __init__(self, image_filenames: List[str], labels: List[int],
+                 batch_size: int, width_shift_range: float=0):
         self.image_filenames, self.labels = image_filenames, labels
         self.batch_size = batch_size
         self.width_shift_range = width_shift_range
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Get the number of batches per epoch.
         """
         return int(np.ceil(len(self.image_filenames) / float(self.batch_size)))
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx: int) -> Tuple[np.ndarray, List[int]]:
         """Generates one batch of data
         """
 
-        def _transform(img, transformation_x=0, transformation_y=0):
+        def _transform(img: np.ndarray,
+                       transformation_x: float=0, transformation_y: float=0) -> np.ndarray:
             """Transform image as numpy tensor.
             Only width_shift and height_shift transformations implemented.
             """
