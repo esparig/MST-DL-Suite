@@ -2,6 +2,7 @@
 Generation of train, validation, and test datasets
 """
 import os
+import warnings
 from typing import List, Tuple, Sequence
 from pathlib import Path
 from collections import defaultdict
@@ -11,9 +12,9 @@ from keras.utils import to_categorical
 Dataset = Tuple[List[str], List[int], List[str], List[int], List[str], List[int]]
 
 def get_dataset(dataset_path: Path, percent_train: int=80, percent_val: int=10,
-                percent_test: int=10, num_classes: int=9) -> Sequence[Dataset]:
+                percent_test: int=10, classes: List[str]=None) -> Sequence[Dataset]:
     """
-    Returns filename and label lists of samples
+    Gets filename and label lists of samples
 
     percent_train: default 80
     percent_val: default 10
@@ -21,16 +22,21 @@ def get_dataset(dataset_path: Path, percent_train: int=80, percent_val: int=10,
 
     return (training_ds, training_labels, val_ds, val_labels, test_ds, test_labels)
     """
-    dataset_path = str(dataset_path) # TO DO: change everything to work with pathlib
     if (percent_train + percent_val + percent_test) != 100:
         percent_train, percent_val, percent_test = 80, 10, 10
-        print("Default values for training/validation/test examples have been set (80/10/10)")
+        warnings.warn(
+            "Default values for training/validation/test examples have been set (80/10/10)",
+            Warning)
 
     files_by_category = defaultdict(list)
-    for category in [ folder for folder in os.listdir(dataset_path)
-    if os.path.isdir(os.path.join(dataset_path, folder)) ]:
-        files_by_category[category].extend([ os.path.join(dataset_path, category, it) for it in
-                                            os.listdir(os.path.join(dataset_path, category))])
+    if not classes:
+        classes = [folder.name for folder in dataset_path.iterdir() if folder.is_dir()]
+
+    num_classes = len(classes)
+
+    for category in classes:
+        files_by_category[category].extend(
+            [file for file in dataset_path.joinpath(category).iterdir()])
 
     val_ds, test_ds, training_ds = [], [], []
     val_labels, test_labels, training_labels = [], [], []
