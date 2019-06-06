@@ -35,6 +35,8 @@ def main():
                     help='an integer for the batch size')
     parser.add_argument('--epochs', metavar='Number of Epochs', type=int, required=True,
                     help='an integer for the numer of epochs')
+    parser.add_argument('--classes', metavar='Selection of classes in the dataset', nargs='+',
+                        help='classes without quotes, separated by a white space')
     args = parser.parse_args()
 
     print("Executing:", parser.prog)
@@ -42,6 +44,7 @@ def main():
     print("Dataset:", args.dataset)
     print("Batch Size:", args.batch_size)
     print("Epochs:", args.epochs)
+    print("Classes:", args.classes)
 
     # Get current script name
     output_folder = parser.prog[:-3]+".results"
@@ -51,17 +54,19 @@ def main():
     # Set dataset path
     dataset_path = Path(args.dataset)
 
+    # Set classes
+    if args.classes:
+        classes = args.classes
+    else:
+        classes = [folder.name for folder in dataset_path.iterdir() if folder.is_dir()]
+
     # Get training, validation, and test datasets
     x_train, y_train, x_val, y_val, _, _ = get_dataset(dataset_path,
                                                        percent_train=80,
                                                        percent_val=20,
-                                                       percent_test=0)
-    """for i in range(5):
-        print(x_train[i], y_train[i])
-    """
-    # Check an example
-    # obj = np.load("G:\dataset\molestadoleve\ObjImg_20190306_164029.384_10407.npy")
-    # print(obj)
+                                                       percent_test=0,
+                                                       classes=classes)
+    
     """
     # Inizialize and check the generator
     my_training_batch_generator = My_Generator(x_train, y_train, 2)
@@ -82,13 +87,12 @@ def main():
     """
 
     # Inizialize the model and print a summary
-    model = get_model(classes=3)
+    model = get_model(input_shape=(200, 200, 24), classes=len(classes))
     model.summary()
 
     # Set hyperparameters, inizialize generators, and train the model
     batch_size = args.batch_size
-    # num_training_samples = len(x_train)
-    # num_validation_samples = len(x_test)
+    num_epochs = args.epochs
 
     opt = SGD(lr=0.01, decay=1e-9, momentum=0.9, nesterov=True)
     model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['acc', 'mse'])
@@ -98,11 +102,8 @@ def main():
 
     # monitor = EarlyStopping(monitor='acc', patience=1)  # Not working as expected
 
-    num_epochs = args.epochs
-    # steps_per_epoch = ceil(num_training_samples/batch_size)
     custom_model = model.fit_generator(generator=my_training_batch_generator,
             validation_data=my_validation_batch_generator,
-            # steps_per_epoch=steps_per_epoch,
             epochs=num_epochs,
             verbose=1)
 
@@ -120,7 +121,7 @@ def main():
 
     # Visualizing of confusion matrix
     custom_model_predicted = plot_confusion_matrix(model, my_validation_batch_generator, y_val,
-                          ['molestadograve', 'molestadoleve', 'primera'], current_datetime,
+                          classes, current_datetime,
                           output_folder=output_folder, show_figure=False)
 
     # Metrics: precision, recall, f1-score, support
