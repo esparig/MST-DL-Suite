@@ -29,11 +29,11 @@ def main():
     """
     # Argument Parser
     parser = argparse.ArgumentParser(description='Example DL training.')
-    parser.add_argument('--dataset', metavar='Dataset Path', type=str,
+    parser.add_argument('--dataset', metavar='Dataset Path', type=str, required=True,
                     help='a string with the dataset path')
-    parser.add_argument('--batch_size', metavar='Batch size', type=int,
+    parser.add_argument('--batch_size', metavar='Batch size', type=int, required=True,
                     help='an integer for the batch size')
-    parser.add_argument('--epochs', metavar='Number of Epochs', type=int,
+    parser.add_argument('--epochs', metavar='Number of Epochs', type=int, required=True,
                     help='an integer for the numer of epochs')
     args = parser.parse_args()
 
@@ -55,8 +55,7 @@ def main():
     x_train, y_train, x_val, y_val, _, _ = get_dataset(dataset_path,
                                                        percent_train=80,
                                                        percent_val=20,
-                                                       percent_test=0,
-                                                       num_classes=3)
+                                                       percent_test=0)
     """for i in range(5):
         print(x_train[i], y_train[i])
     """
@@ -107,18 +106,26 @@ def main():
             epochs=num_epochs,
             verbose=1)
 
+    if num_epochs < 1:
+        history = {'acc':[0.5, 0.55, 0.75], 'val_acc':[0.2, 0.15, 0.3],
+                   'loss':[0.2, 0.2, 0.2], 'val_loss':[0.3, 0.4, 0.4]}
+    else:
+        history = custom_model.history
+
     # Plot performance graphics
-    plot_performance_graphics(custom_model.history, num_epochs,
+    current_datetime = str(datetime.datetime.now())
+
+    plot_performance_graphics(history, num_epochs, current_datetime,
                               output_folder=output_folder, show_figure=False)
 
     # Visualizing of confusion matrix
     custom_model_predicted = plot_confusion_matrix(model, my_validation_batch_generator, y_val,
-                          ['molestadograve', 'molestadoleve', 'primera'],
+                          ['molestadograve', 'molestadoleve', 'primera'], current_datetime,
                           output_folder=output_folder, show_figure=False)
 
     # Metrics: precision, recall, f1-score, support
     custom_model_report = classification_report(np.argmax(y_val, axis=1), custom_model_predicted)
-    with open(os.path.join(output_folder, str(datetime.datetime.now())+"_out.txt"), 'w') as file:
+    with open(os.path.join(output_folder, current_datetime+"_out.txt"), 'w') as file:
         file.write(custom_model_report)
 
 

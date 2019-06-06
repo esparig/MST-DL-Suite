@@ -3,7 +3,6 @@ Plot performance graphics
 
 """
 import os
-import datetime
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -11,11 +10,11 @@ import seaborn as sns
 from sklearn.metrics import confusion_matrix
 
 
-def plot_performance_graphics(history, num_epochs,
+def plot_performance_graphics(history, num_epochs, current_datetime,
                               output_folder=None, save_figure=True, show_figure=True):
     """Plot performance graphics of the trainig
     """
-
+    
     plt.figure(0)
     plt.plot(history['acc'],'r')
     plt.plot(history['val_acc'],'g')
@@ -30,7 +29,7 @@ def plot_performance_graphics(history, num_epochs,
     plt.legend(['train','validation'])
 
     if save_figure:
-        plt.savefig(os.path.join(output_folder, str(datetime.datetime.now())+"_acc.png"))
+        plt.savefig(os.path.join(output_folder, current_datetime+"_acc.png"))
     if show_figure:
         plt.show()
 
@@ -48,12 +47,12 @@ def plot_performance_graphics(history, num_epochs,
     plt.legend(['train','validation'])
 
     if save_figure:
-        plt.savefig(os.path.join(output_folder, str(datetime.datetime.now())+"_loss.png"))
+        plt.savefig(os.path.join(output_folder, current_datetime+"_loss.png"))
     if show_figure:
         plt.show()
 
-def plot_confusion_matrix(model, batch, labels, classes_names, output_folder=None,
-                          save_figure=True, show_figure=True):
+def plot_confusion_matrix(model, batch, labels, classes_names, current_datetime,
+                          output_folder=None, save_figure=True, show_figure=True):
     """Plot confusion matrix
     """
     model_predicted = np.argmax(model.predict_generator(batch, verbose=1), axis=1)
@@ -67,7 +66,7 @@ def plot_confusion_matrix(model, batch, labels, classes_names, output_folder=Non
 
     if save_figure:
         plt.savefig(os.path.join(output_folder,
-                                 str(datetime.datetime.now())+"_confusion_matrix.png"))
+                                 current_datetime+"_confusion_matrix.png"))
     if show_figure:
         plt.show()
 
