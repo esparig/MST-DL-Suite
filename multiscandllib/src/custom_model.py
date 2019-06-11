@@ -73,7 +73,7 @@ def _custom_model_01(input_shape: Tuple[int, int, int], classes: int) -> Sequent
     return model
 
 
-def get_model(input_shape: Tuple[int, int, int]=(200, 200, 24), classes: int=9) -> Sequential:
+def get_model(input_shape: Tuple[int, int, int], classes: int) -> Sequential:
     """Caller function to create the Model.
     """
     return _custom_model_01(input_shape = input_shape, classes = classes)

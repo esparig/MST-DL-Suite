@@ -13,7 +13,10 @@ import datetime
 from pathlib import Path
 import numpy as np
 
+import tensorflow as tf
+from keras.applications import Xception
 from keras.optimizers import SGD
+from keras.utils import multi_gpu_model
 from sklearn.metrics import classification_report
 
 import sys
@@ -35,6 +38,8 @@ def main():
                     help='an integer for the batch size')
     parser.add_argument('--epochs', metavar='Number of Epochs', type=int, required=True,
                     help='an integer for the numer of epochs')
+    parser.add_argument('--classes', metavar='Selection of classes in the dataset', nargs='+',
+                        help='classes without quotes, separated by a white space')
     args = parser.parse_args()
 
     print("Executing:", parser.prog)
@@ -42,86 +47,70 @@ def main():
     print("Dataset:", args.dataset)
     print("Batch Size:", args.batch_size)
     print("Epochs:", args.epochs)
+    print("Classes:", args.classes)
 
     # Get current script name
     output_folder = parser.prog[:-3]+".results"
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
-    # Set dataset path
+    # Set hyperparameters
     dataset_path = Path(args.dataset)
+    batch_size = args.batch_size
+    num_epochs = args.epochs
+
+    # Set classes
+    if args.classes:
+        classes = args.classes
+    else:
+        classes = [folder.name for folder in dataset_path.iterdir() if folder.is_dir()]
+
+    num_classes = len(classes)
+
+        # Instantiate the base model
+    with tf.device('/cpu:0'):
+        model = Xception(weights=None,
+                     input_shape=(200, 200, 24),
+                     classes=num_classes)
+
+    parallel_model = multi_gpu_model(model, gpus=2)
 
     # Get training, validation, and test datasets
     x_train, y_train, x_val, y_val, _, _ = get_dataset(dataset_path,
                                                        percent_train=80,
                                                        percent_val=20,
-                                                       percent_test=0)
-    """for i in range(5):
-        print(x_train[i], y_train[i])
-    """
-    # Check an example
-    # obj = np.load("G:\dataset\molestadoleve\ObjImg_20190306_164029.384_10407.npy")
-    # print(obj)
-    """
-    # Inizialize and check the generator
-    my_training_batch_generator = My_Generator(x_train, y_train, 2)
-    x, y = my_training_batch_generator.__getitem__(0)
-    print(x.shape)
-    plot_numpy(x[0])
-    plot_numpy(x[1])
-    print(y.shape)
-
-
-    # Inizialize and check the generator
-    my_training_batch_generator = My_Generator(x_train, y_train, 2, width_shift_range = 0.2)
-    x, y = my_training_batch_generator.__getitem__(0)
-    print(x.shape)
-    plot_numpy(x[0])
-    plot_numpy(x[1])
-    print(y.shape, "\n", y[:2])
-    """
+                                                       percent_test=0,
+                                                       classes=classes)
 
     # Inizialize the model and print a summary
-    model = get_model(classes=3)
-    model.summary()
+    #model = get_model(input_shape=(200, 200, 24), classes=num_classes)
+    parallel_model.summary()
 
     # Set hyperparameters, inizialize generators, and train the model
-    batch_size = args.batch_size
-    # num_training_samples = len(x_train)
-    # num_validation_samples = len(x_test)
 
     opt = SGD(lr=0.01, decay=1e-9, momentum=0.9, nesterov=True)
-    model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['acc', 'mse'])
+    parallel_model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['acc', 'mse'])
 
     my_training_batch_generator = DataGenerator(x_train, y_train, batch_size, width_shift_range=0.2)
     my_validation_batch_generator = DataGenerator(x_val, y_val, batch_size)
 
     # monitor = EarlyStopping(monitor='acc', patience=1)  # Not working as expected
 
-    num_epochs = args.epochs
-    # steps_per_epoch = ceil(num_training_samples/batch_size)
-    custom_model = model.fit_generator(generator=my_training_batch_generator,
+    custom_model = parallel_model.fit_generator(generator=my_training_batch_generator,
             validation_data=my_validation_batch_generator,
-            # steps_per_epoch=steps_per_epoch,
             epochs=num_epochs,
             verbose=1)
-
-    if num_epochs < 1:
-        history = {'acc':[0.5, 0.55, 0.75], 'val_acc':[0.2, 0.15, 0.3],
-                   'loss':[0.2, 0.2, 0.2], 'val_loss':[0.3, 0.4, 0.4]}
-    else:
-        history = custom_model.history
-
+    print(my_training_batch_generator.store_idx)
     # Plot performance graphics
     current_datetime = str(datetime.datetime.now())
 
-    plot_performance_graphics(history, num_epochs, current_datetime,
+    plot_performance_graphics(custom_model.history, num_epochs, preffix=current_datetime,
                               output_folder=output_folder, show_figure=False)
 
     # Visualizing of confusion matrix
-    custom_model_predicted = plot_confusion_matrix(model, my_validation_batch_generator, y_val,
-                          ['molestadograve', 'molestadoleve', 'primera'], current_datetime,
-                          output_folder=output_folder, show_figure=False)
+    custom_model_predicted = plot_confusion_matrix(parallel_model, my_validation_batch_generator,
+                                                   y_val, classes, preffix=current_datetime,
+                                                   output_folder=output_folder, show_figure=False)
 
     # Metrics: precision, recall, f1-score, support
     custom_model_report = classification_report(np.argmax(y_val, axis=1), custom_model_predicted)

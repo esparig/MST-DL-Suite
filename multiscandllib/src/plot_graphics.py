@@ -10,7 +10,7 @@ import seaborn as sns
 from sklearn.metrics import confusion_matrix
 
 
-def plot_performance_graphics(history, num_epochs, current_datetime,
+def plot_performance_graphics(history, num_epochs, preffix="",
                               output_folder=None, save_figure=True, show_figure=True):
     """Plot performance graphics of the trainig
     """
@@ -29,7 +29,7 @@ def plot_performance_graphics(history, num_epochs, current_datetime,
     plt.legend(['train','validation'])
 
     if save_figure:
-        plt.savefig(os.path.join(output_folder, current_datetime+"_acc.png"))
+        plt.savefig(os.path.join(output_folder, preffix+"_acc.png"))
     if show_figure:
         plt.show()
 
@@ -47,11 +47,11 @@ def plot_performance_graphics(history, num_epochs, current_datetime,
     plt.legend(['train','validation'])
 
     if save_figure:
-        plt.savefig(os.path.join(output_folder, current_datetime+"_loss.png"))
+        plt.savefig(os.path.join(output_folder, preffix+"_loss.png"))
     if show_figure:
         plt.show()
 
-def plot_confusion_matrix(model, batch, labels, classes_names, current_datetime,
+def plot_confusion_matrix(model, batch, labels, classes_names, preffix="",
                           output_folder=None, save_figure=True, show_figure=True):
     """Plot confusion matrix
     """
@@ -66,7 +66,7 @@ def plot_confusion_matrix(model, batch, labels, classes_names, current_datetime,
 
     if save_figure:
         plt.savefig(os.path.join(output_folder,
-                                 current_datetime+"_confusion_matrix.png"))
+                                 preffix+"_confusion_matrix.png"))
     if show_figure:
         plt.show()
 
