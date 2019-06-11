@@ -12,10 +12,12 @@ class DataGenerator(Sequence):
     """
 
     def __init__(self, image_filenames: List[str], labels: List[int],
-                 batch_size: int, width_shift_range: float=0):
+                 batch_size: int, width_shift_range: float = 0):
         self.image_filenames, self.labels = image_filenames, labels
         self.batch_size = batch_size
         self.width_shift_range = width_shift_range
+        self.store_idx = []
+        self.store_batch = []
 
     def __len__(self) -> int:
         """Get the number of batches per epoch.
@@ -25,9 +27,10 @@ class DataGenerator(Sequence):
     def __getitem__(self, idx: int) -> Tuple[np.ndarray, List[int]]:
         """Generates one batch of data
         """
+        self.store_idx.append(idx)
 
         def _transform(img: np.ndarray,
-                       transformation_x: float=0, transformation_y: float=0) -> np.ndarray:
+                       transformation_x: float = 0, transformation_y: float = 0) -> np.ndarray:
             """Transform image as numpy tensor.
             Only width_shift and height_shift transformations implemented.
             """
@@ -51,9 +54,12 @@ class DataGenerator(Sequence):
         batch_x = self.image_filenames[idx * self.batch_size:(idx + 1) * self.batch_size]
         batch_y = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
 
-        result = (np.array([np.interp(
-            _transform(np.load(file_name), transformation_x=self.width_shift_range),
-            (0, 1023), (0, 1))
+        self.store_batch.extend(batch_x)
+
+        result = (np.array([
+            np.interp(
+                _transform(np.load(file_name), transformation_x=self.width_shift_range),
+                (0, 1023), (0, 1))
             for file_name in batch_x]), batch_y)
 
         return result
