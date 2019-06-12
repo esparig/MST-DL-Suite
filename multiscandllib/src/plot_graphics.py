@@ -51,11 +51,11 @@ def plot_performance_graphics(history, num_epochs, preffix="",
     if show_figure:
         plt.show()
 
-def plot_confusion_matrix(model, batch, labels, classes_names, preffix="",
+def plot_confusion_matrix(MODEL, batch, labels, classes_names, preffix="",
                           output_folder=None, save_figure=True, show_figure=True):
     """Plot confusion matrix
     """
-    model_predicted = np.argmax(model.predict_generator(batch, verbose=1), axis=1)
+    model_predicted = np.argmax(MODEL.predict_generator(batch, verbose=1), axis=1)
     model_df_cm = pd.DataFrame(
         confusion_matrix(np.argmax(labels, axis=1), model_predicted),
         classes_names, classes_names)

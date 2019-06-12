@@ -1,7 +1,7 @@
 """Example using:
 - custom_model_01: 7 blocks of Conv2D+BN+GN+MP
 - dataset using 12 views (24 layers of depth)
-- number of classes is 3
+- number of CLASSES is 3
 - batch ize is 64
 - number of epochs is 10.
 
@@ -38,8 +38,8 @@ def main():
                     help='an integer for the batch size')
     parser.add_argument('--epochs', metavar='Number of Epochs', type=int, required=True,
                     help='an integer for the numer of epochs')
-    parser.add_argument('--classes', metavar='Selection of classes in the dataset', nargs='+',
-                        help='classes without quotes, separated by a white space')
+    parser.add_argument('--CLASSES', metavar='Selection of CLASSES in the dataset', nargs='+',
+                        help='CLASSES without quotes, separated by a white space')
     args = parser.parse_args()
 
     print("Executing:", parser.prog)
@@ -59,40 +59,40 @@ def main():
     batch_size = args.batch_size
     num_epochs = args.epochs
 
-    # Set classes
+    # Set CLASSES
     if args.classes:
-        classes = args.classes
+        CLASSES = args.classes
     else:
-        classes = [folder.name for folder in dataset_path.iterdir() if folder.is_dir()]
+        CLASSES = [folder.name for folder in dataset_path.iterdir() if folder.is_dir()]
 
-    num_classes = len(classes)
+    num_classes = len(CLASSES)
 
-        # Instantiate the base model
+        # Instantiate the base MODEL
     with tf.device('/cpu:0'):
-        model = Xception(weights=None,
+        MODEL = Xception(weights=None,
                      input_shape=(200, 200, 24),
-                     classes=num_classes)
+                     CLASSES=num_classes)
 
-    parallel_model = multi_gpu_model(model, gpus=2)
+    parallel_model = multi_gpu_model(MODEL, gpus=2)
 
     # Get training, validation, and test datasets
-    x_train, y_train, x_val, y_val, _, _ = get_dataset(dataset_path,
+    X_TRAIN, Y_TRAIN, X_VAL, Y_VAL, _, _ = get_dataset(dataset_path,
                                                        percent_train=80,
                                                        percent_val=20,
                                                        percent_test=0,
-                                                       classes=classes)
+                                                       CLASSES=CLASSES)
 
-    # Inizialize the model and print a summary
-    #model = get_model(input_shape=(200, 200, 24), classes=num_classes)
+    # Inizialize the MODEL and print a summary
+    #MODEL = get_model(input_shape=(200, 200, 24), CLASSES=num_classes)
     parallel_model.summary()
 
-    # Set hyperparameters, inizialize generators, and train the model
+    # Set hyperparameters, inizialize generators, and train the MODEL
 
     opt = SGD(lr=0.01, decay=1e-9, momentum=0.9, nesterov=True)
     parallel_model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['acc', 'mse'])
 
-    my_training_batch_generator = DataGenerator(x_train, y_train, batch_size, width_shift_range=0.2)
-    my_validation_batch_generator = DataGenerator(x_val, y_val, batch_size)
+    my_training_batch_generator = DataGenerator(X_TRAIN, Y_TRAIN, batch_size, width_shift_range=0.2)
+    my_validation_batch_generator = DataGenerator(X_VAL, Y_VAL, batch_size)
 
     # monitor = EarlyStopping(monitor='acc', patience=1)  # Not working as expected
 
@@ -109,11 +109,11 @@ def main():
 
     # Visualizing of confusion matrix
     custom_model_predicted = plot_confusion_matrix(parallel_model, my_validation_batch_generator,
-                                                   y_val, classes, preffix=current_datetime,
+                                                   Y_VAL, CLASSES, preffix=current_datetime,
                                                    output_folder=output_folder, show_figure=False)
 
     # Metrics: precision, recall, f1-score, support
-    custom_model_report = classification_report(np.argmax(y_val, axis=1), custom_model_predicted)
+    custom_model_report = classification_report(np.argmax(Y_VAL, axis=1), custom_model_predicted)
     with open(os.path.join(output_folder, current_datetime+"_out.txt"), 'w') as file:
         file.write(custom_model_report)
 

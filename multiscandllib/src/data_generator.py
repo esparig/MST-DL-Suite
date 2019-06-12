@@ -16,8 +16,6 @@ class DataGenerator(Sequence):
         self.image_filenames, self.labels = image_filenames, labels
         self.batch_size = batch_size
         self.width_shift_range = width_shift_range
-        self.store_idx = []
-        self.store_batch = []
 
     def __len__(self) -> int:
         """Get the number of batches per epoch.
@@ -27,7 +25,6 @@ class DataGenerator(Sequence):
     def __getitem__(self, idx: int) -> Tuple[np.ndarray, List[int]]:
         """Generates one batch of data
         """
-        self.store_idx.append(idx)
 
         def _transform(img: np.ndarray,
                        transformation_x: float = 0, transformation_y: float = 0) -> np.ndarray:
@@ -53,8 +50,6 @@ class DataGenerator(Sequence):
 
         batch_x = self.image_filenames[idx * self.batch_size:(idx + 1) * self.batch_size]
         batch_y = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
-
-        self.store_batch.extend(batch_x)
 
         result = (np.array([
             np.interp(

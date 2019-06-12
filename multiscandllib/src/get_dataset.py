@@ -12,7 +12,7 @@ from keras.utils import to_categorical
 Dataset = Tuple[List[str], List[int], List[str], List[int], List[str], List[int]]
 
 def get_dataset(dataset_path: Path, percent_train: int=80, percent_val: int=10,
-                percent_test: int=10, classes: List[str]=None) -> Sequence[Dataset]:
+                percent_test: int=10, CLASSES: List[str]=None) -> Sequence[Dataset]:
     """
     Gets filename and label lists of samples
 
@@ -29,12 +29,12 @@ def get_dataset(dataset_path: Path, percent_train: int=80, percent_val: int=10,
             Warning)
 
     files_by_category = defaultdict(list)
-    if not classes:
-        classes = [folder.name for folder in dataset_path.iterdir() if folder.is_dir()]
+    if not CLASSES:
+        CLASSES = [folder.name for folder in dataset_path.iterdir() if folder.is_dir()]
 
-    num_classes = len(classes)
+    num_classes = len(CLASSES)
 
-    for category in classes:
+    for category in CLASSES:
         files_by_category[category].extend(
             [file for file in dataset_path.joinpath(category).iterdir()])
 

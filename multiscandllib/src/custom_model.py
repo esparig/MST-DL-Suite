@@ -12,8 +12,8 @@ from keras.layers.core import Flatten, Dense
 from keras.layers.convolutional import Conv2D, MaxPooling2D
 from keras.layers.normalization import BatchNormalization
 
-def _custom_model_01(input_shape: Tuple[int, int, int], classes: int) -> Sequential:
-    """Custom model form by 7 blocks. Each block contains:
+def _custom_model_01(input_shape: Tuple[int, int, int], CLASSES: int) -> Sequential:
+    """Custom MODEL form by 7 blocks. Each block contains:
     - Conv2D
     - BatchNormalization
     - GaussianNoise
@@ -21,59 +21,59 @@ def _custom_model_01(input_shape: Tuple[int, int, int], classes: int) -> Sequent
     Followed by the classification block.
     """
 
-    model = Sequential()
+    MODEL = Sequential()
     # Block 1
-    model.add(Conv2D(32, (3, 3), activation='relu', padding="same", name='block1_conv1',
+    MODEL.add(Conv2D(32, (3, 3), activation='relu', padding="same", name='block1_conv1',
                      input_shape=input_shape))
-    model.add(BatchNormalization())
-    model.add(GaussianNoise(0.3))
-    model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))  # to 100x100
+    MODEL.add(BatchNormalization())
+    MODEL.add(GaussianNoise(0.3))
+    MODEL.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))  # to 100x100
 
     # Block 2
-    model.add(Conv2D(64, (3, 3), activation='relu', padding='same', name='block2_conv1'))
-    model.add(BatchNormalization())
-    model.add(GaussianNoise(0.3))
-    model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool'))  # to 50x50
+    MODEL.add(Conv2D(64, (3, 3), activation='relu', padding='same', name='block2_conv1'))
+    MODEL.add(BatchNormalization())
+    MODEL.add(GaussianNoise(0.3))
+    MODEL.add(MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool'))  # to 50x50
 
     # Block 3
-    model.add(Conv2D(128, (3, 3), activation='relu', padding='same', name='block3_conv1'))
-    model.add(BatchNormalization())
-    model.add(GaussianNoise(0.3))
-    model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block3_pool'))  # to 25x25
+    MODEL.add(Conv2D(128, (3, 3), activation='relu', padding='same', name='block3_conv1'))
+    MODEL.add(BatchNormalization())
+    MODEL.add(GaussianNoise(0.3))
+    MODEL.add(MaxPooling2D((2, 2), strides=(2, 2), name='block3_pool'))  # to 25x25
 
     # Block 4
-    model.add(Conv2D(256, (3, 3), activation='relu', padding='same', name='block4_conv1'))
-    model.add(BatchNormalization())
-    model.add(GaussianNoise(0.3))
-    model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block4_pool'))  # to 12x12
+    MODEL.add(Conv2D(256, (3, 3), activation='relu', padding='same', name='block4_conv1'))
+    MODEL.add(BatchNormalization())
+    MODEL.add(GaussianNoise(0.3))
+    MODEL.add(MaxPooling2D((2, 2), strides=(2, 2), name='block4_pool'))  # to 12x12
 
     # Block 5
-    model.add(Conv2D(512, (3, 3), activation='relu', padding='same', name='block5_conv1'))
-    model.add(BatchNormalization())
-    model.add(GaussianNoise(0.3))
-    model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool'))  # to 6x6
+    MODEL.add(Conv2D(512, (3, 3), activation='relu', padding='same', name='block5_conv1'))
+    MODEL.add(BatchNormalization())
+    MODEL.add(GaussianNoise(0.3))
+    MODEL.add(MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool'))  # to 6x6
 
     # Block 6
-    model.add(Conv2D(512, (3, 3), activation='relu', padding='same', name='block6_conv1'))
-    model.add(BatchNormalization())
-    model.add(GaussianNoise(0.3))
-    model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block6_pool'))  # to 3x3
+    MODEL.add(Conv2D(512, (3, 3), activation='relu', padding='same', name='block6_conv1'))
+    MODEL.add(BatchNormalization())
+    MODEL.add(GaussianNoise(0.3))
+    MODEL.add(MaxPooling2D((2, 2), strides=(2, 2), name='block6_pool'))  # to 3x3
 
     # Block 7
-    model.add(Conv2D(512, (3, 3), activation='relu', padding='same', name='block7_conv1'))
-    model.add(BatchNormalization())
-    model.add(GaussianNoise(0.3))
-    model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block7_pool'))  # to 1x1
+    MODEL.add(Conv2D(512, (3, 3), activation='relu', padding='same', name='block7_conv1'))
+    MODEL.add(BatchNormalization())
+    MODEL.add(GaussianNoise(0.3))
+    MODEL.add(MaxPooling2D((2, 2), strides=(2, 2), name='block7_pool'))  # to 1x1
 
     # Classification block
-    model.add(Flatten(name='flatten'))
-    model.add(Dense(512, activation='relu', name='fc1'))
-    model.add(Dense(classes, activation='softmax', name='predictions'))
+    MODEL.add(Flatten(name='flatten'))
+    MODEL.add(Dense(512, activation='relu', name='fc1'))
+    MODEL.add(Dense(CLASSES, activation='softmax', name='predictions'))
 
-    return model
+    return MODEL
 
 
-def get_model(input_shape: Tuple[int, int, int], classes: int) -> Sequential:
+def get_model(input_shape: Tuple[int, int, int], CLASSES: int) -> Sequential:
     """Caller function to create the Model.
     """
-    return _custom_model_01(input_shape = input_shape, classes = classes)
+    return _custom_model_01(input_shape = input_shape, CLASSES = CLASSES)

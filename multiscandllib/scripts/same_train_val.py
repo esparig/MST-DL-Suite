@@ -1,11 +1,8 @@
-"""Example using:
-- custom_model_01: 7 blocks of Conv2D+BN+GN+MP
-- dataset using 12 views (24 layers of depth)
-- number of CLASSES is 3
-- batch ize is 64
-- number of epochs is 10.
+"""Script to test fit_generator:
 
-Date: 20190531
+Using same train/validtion set.
+
+Date: 20190611
 """
 import os
 import argparse
@@ -19,7 +16,6 @@ from sklearn.metrics import classification_report
 import sys
 sys.path.append('..')
 sys.path.append('.')
-
 from src.get_dataset import get_dataset
 from src.custom_model import get_model
 from src.data_generator import DataGenerator
@@ -63,11 +59,13 @@ def main():
         CLASSES = [folder.name for folder in dataset_path.iterdir() if folder.is_dir()]
 
     # Get training, validation, and test datasets
-    X_TRAIN, Y_TRAIN, X_VAL, Y_VAL, _, _ = get_dataset(dataset_path,
-                                                       percent_train=80,
-                                                       percent_val=20,
+    X_TRAIN, Y_TRAIN, _, _, _, _ = get_dataset(dataset_path,
+                                                       percent_train=100,
+                                                       percent_val=0,
                                                        percent_test=0,
                                                        CLASSES=CLASSES)
+    X_VAL = X_TRAIN[0:]
+    Y_VAL = Y_TRAIN[0:]
 
     # Inizialize the MODEL and print a summary
     MODEL = get_model(input_shape=(200, 200, 24), CLASSES=len(CLASSES))
@@ -80,7 +78,7 @@ def main():
     opt = SGD(lr=0.01, decay=1e-9, momentum=0.9, nesterov=True)
     MODEL.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['acc', 'mse'])
 
-    my_training_batch_generator = DataGenerator(X_TRAIN, Y_TRAIN, batch_size, width_shift_range=0.2)
+    my_training_batch_generator = DataGenerator(X_TRAIN, Y_TRAIN, batch_size)
     my_validation_batch_generator = DataGenerator(X_VAL, Y_VAL, batch_size)
 
     # monitor = EarlyStopping(monitor='acc', patience=1)  # Not working as expected
@@ -88,8 +86,6 @@ def main():
     custom_model = MODEL.fit_generator(generator=my_training_batch_generator,
                                        validation_data=my_validation_batch_generator,
                                        epochs=num_epochs,
-                                       use_multiprocessing=True,
-                                       workers=16,
                                        verbose=1)
 
     # Plot performance graphics
@@ -104,7 +100,7 @@ def main():
                                                    output_folder=output_folder, show_figure=False)
 
     # Metrics: precision, recall, f1-score, support
-    custom_model_report = classification_report(np.argmax(Y_VAL, axis=1), custom_model_predicted)
+    custom_model_report = classification_report(np.argmax(Y_TRAIN, axis=1), custom_model_predicted)
     with open(os.path.join(output_folder, current_datetime+"_out.txt"), 'w') as file:
         file.write(custom_model_report)
 
