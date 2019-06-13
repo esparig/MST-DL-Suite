@@ -52,9 +52,8 @@ class DataGenerator(Sequence):
         batch_y = self.labels[idx * self.batch_size:(idx + 1) * self.batch_size]
 
         result = (np.array([
-            np.interp(
-                _transform(np.load(file_name), transformation_x=self.width_shift_range),
-                (0, 1023), (0, 1))
+            _transform(np.load(file_name),
+                       transformation_x=self.width_shift_range).astype('float32') / 1023
             for file_name in batch_x]), batch_y)
 
         return result

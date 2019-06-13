@@ -1,7 +1,7 @@
 """Custom Models:
 Input shape: (200,200,24) to match our example shape (width, heigh, layers).
 Layers: 24 = (3HSI(color)+1I(nir))*6 views.
-Classes: 9 being [agostadograve, agostadoleve, granizo, molestadograve, molestadoleve,
+classes: 9 being [agostadograve, agostadoleve, granizo, molestadograve, molestadoleve,
 molino, morada, picadodemosca, primera].
 """
 from typing import Tuple
@@ -12,7 +12,7 @@ from keras.layers.core import Flatten, Dense
 from keras.layers.convolutional import Conv2D, MaxPooling2D
 from keras.layers.normalization import BatchNormalization
 
-def _custom_model_01(input_shape: Tuple[int, int, int], CLASSES: int) -> Sequential:
+def _custom_model_01(input_shape: Tuple[int, int, int], classes: int) -> Sequential:
     """Custom MODEL form by 7 blocks. Each block contains:
     - Conv2D
     - BatchNormalization
@@ -68,12 +68,12 @@ def _custom_model_01(input_shape: Tuple[int, int, int], CLASSES: int) -> Sequent
     # Classification block
     MODEL.add(Flatten(name='flatten'))
     MODEL.add(Dense(512, activation='relu', name='fc1'))
-    MODEL.add(Dense(CLASSES, activation='softmax', name='predictions'))
+    MODEL.add(Dense(classes, activation='softmax', name='predictions'))
 
     return MODEL
 
 
-def get_model(input_shape: Tuple[int, int, int], CLASSES: int) -> Sequential:
+def get_model(input_shape: Tuple[int, int, int], classes: int) -> Sequential:
     """Caller function to create the Model.
     """
-    return _custom_model_01(input_shape = input_shape, CLASSES = CLASSES)
+    return _custom_model_01(input_shape = input_shape, classes = classes)
