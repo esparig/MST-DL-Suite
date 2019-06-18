@@ -1,7 +1,7 @@
 """Custom Models:
 Input shape: (200,200,24) to match our example shape (width, heigh, layers).
 Layers: 24 = (3HSI(color)+1I(nir))*6 views.
-Classes: 9 being [agostadograve, agostadoleve, granizo, molestadograve, molestadoleve,
+classes: 9 being [agostadograve, agostadoleve, granizo, molestadograve, molestadoleve,
 molino, morada, picadodemosca, primera].
 """
 from typing import Tuple
