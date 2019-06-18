@@ -22,7 +22,7 @@ import sys
 sys.path.append('..')
 sys.path.append('.')
 
-from src.get_dataset import get_dataset
+from src.get_dataset import get_dataset, load_dataset
 from src.custom_model import get_model
 from src.data_generator import DataGenerator
 from src.plot_graphics import plot_performance_graphics, plot_confusion_matrix
@@ -94,28 +94,29 @@ def main():
     my_training_batch_generator = DataGenerator(x_train, y_train, batch_size)
     #, width_shift_range=0.2)
     my_validation_batch_generator = DataGenerator(x_val, y_val, batch_size)
+    #my_validation_data = (load_dataset(x_val), y_val)
 
     # monitor = EarlyStopping(monitor='acc', patience=1)  # Not working as expected
     checkpoint = ModelCheckpoint(
-        os.path.join(output_folder, current_datetime+"weights-{epoch:02d}-{val_acc:.2f}.hdf5"),
+        os.path.join(output_folder, current_datetime+"_weights_{epoch:03d}_{val_acc:.4f}.hdf5"),
         monitor='val_acc', verbose=1, save_best_only=True, mode='max')
     callback_list = [checkpoint]
 
     custom_model = model.fit_generator(generator=my_training_batch_generator,
                                        validation_data=my_validation_batch_generator,
                                        epochs=num_epochs,
-                                       use_multiprocessing=True,
-                                       workers=16,
+                                       #use_multiprocessing=True,
+                                       #workers=16,
                                        callbacks=callback_list,
                                        verbose=1)
 
     # Plot performance graphics
-    plot_performance_graphics(custom_model.history, num_epochs, preffix=current_datetime,
+    plot_performance_graphics(custom_model.history, num_epochs, prefix=current_datetime,
                               output_folder=output_folder, show_figure=False)
 
     # Visualizing of confusion matrix
     custom_model_predicted = plot_confusion_matrix(model, DataGenerator(x_test, y_test, batch_size),
-                                                   y_test, classes, preffix=current_datetime,
+                                                   y_test, classes, prefix=current_datetime,
                                                    output_folder=output_folder, show_figure=False)
 
     # Metrics: precision, recall, f1-score, support

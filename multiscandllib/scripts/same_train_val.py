@@ -91,12 +91,12 @@ def main():
     # Plot performance graphics
     current_datetime = str(datetime.datetime.now())
 
-    plot_performance_graphics(custom_model.history, num_epochs, preffix=current_datetime,
+    plot_performance_graphics(custom_model.history, num_epochs, prefix=current_datetime,
                               output_folder=output_folder, show_figure=False)
 
     # Visualizing of confusion matrix
     custom_model_predicted = plot_confusion_matrix(MODEL, my_validation_batch_generator, Y_VAL,
-                                                   CLASSES, preffix=current_datetime,
+                                                   CLASSES, prefix=current_datetime,
                                                    output_folder=output_folder, show_figure=False)
 
     # Metrics: precision, recall, f1-score, support

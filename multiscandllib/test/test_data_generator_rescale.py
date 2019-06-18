@@ -3,7 +3,7 @@ What method does take less?
 Comparison of times between np.interp and /1023.
 
 Results for 10 epochs:
-    Using np.interp: 189.77499961853027 
+    Using np.interp: 189.77499961853027
     Using \1023: 173.77592372894287
 """
 import random
@@ -74,7 +74,7 @@ class DataGenerator1(Sequence): # Testing purposes
 
         return result
 
-class DataGenerator2(Sequence): 
+class DataGenerator2(Sequence):
     """Class Data Generator for Keras.
     """
 
@@ -130,7 +130,7 @@ X_TRAIN, Y_TRAIN, X_VAL, Y_VAL, _, _ = get_dataset(
     DS_PATH, percent_train=80, percent_val=20, percent_test=0)
 print(len(X_TRAIN), len(X_VAL))
 CLASSES = [folder.name for folder in DS_PATH.iterdir() if folder.is_dir()]
-MODEL = get_model(input_shape=(200, 200, 24), CLASSES=len(CLASSES))
+MODEL = get_model(input_shape=(200, 200, 24), classes=len(CLASSES))
 OPT = SGD(lr=0.01, decay=1e-9, momentum=0.9, nesterov=True)
 MODEL.compile(loss='categorical_crossentropy', optimizer=OPT, metrics=['acc', 'mse'])
 GEN1_TRAIN = DataGenerator1(X_TRAIN, Y_TRAIN, 64)

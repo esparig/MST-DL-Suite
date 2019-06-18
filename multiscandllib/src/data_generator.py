@@ -55,5 +55,4 @@ class DataGenerator(Sequence):
             _transform(np.load(file_name),
                        transformation_x=self.width_shift_range).astype('float32') / 1023
             for file_name in batch_x]), batch_y)
-
         return result

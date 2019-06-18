@@ -1,7 +1,6 @@
 """
 Generation of train, validation, and test datasets
 """
-import os
 import warnings
 from typing import List, Tuple, Sequence
 from pathlib import Path
@@ -72,3 +71,9 @@ def get_dataset(dataset_path: Path, percent_train: int=80, percent_val: int=10,
             to_categorical(training_labels_np.tolist(), num_classes=num_classes),
             val_ds_np.tolist(), to_categorical(val_labels_np.tolist(), num_classes=num_classes),
             test_ds_np.tolist(), to_categorical(test_labels_np.tolist(), num_classes=num_classes))
+
+def load_dataset(x_files):
+    """Load the given dataset files in memmory
+    """
+    x_data = np.array([np.load(file_name).astype('float32') / 1023 for file_name in x_files])
+    return x_data
