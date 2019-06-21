@@ -24,12 +24,12 @@ class TestGetDataset(unittest.TestCase):
                          self.ds_path,percent_train=80,percent_val=20,percent_test=20)
 
     def test_dataset_set_classes(self):
-        """Test if selection of CLASSES
+        """Test if selection of classes
         """
         my_classes = ['primera', 'molestadograve']
         samples, labels, _, _, _, _ = get_dataset(
             self.ds_path, percent_train=100, percent_val=0, percent_test=0,
-            CLASSES = my_classes)
+            classes = my_classes)
         for pair in [(sample.parent.name, my_classes[argmax(label)])
                      for sample, label in zip(samples, labels)]:
             self.assertEqual(pair[0], pair[1])

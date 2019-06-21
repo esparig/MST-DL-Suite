@@ -54,36 +54,36 @@ def main():
 
     # Set CLASSES
     if args.classes:
-        CLASSES = args.classes
+        classes = args.classes
     else:
-        CLASSES = [folder.name for folder in dataset_path.iterdir() if folder.is_dir()]
+        classes = [folder.name for folder in dataset_path.iterdir() if folder.is_dir()]
 
     # Get training, validation, and test datasets
-    X_TRAIN, Y_TRAIN, _, _, _, _ = get_dataset(dataset_path,
+    x_train, y_train, _, _, _, _ = get_dataset(dataset_path,
                                                        percent_train=100,
                                                        percent_val=0,
                                                        percent_test=0,
-                                                       CLASSES=CLASSES)
-    X_VAL = X_TRAIN[0:]
-    Y_VAL = Y_TRAIN[0:]
+                                                       classes=classes)
+    x_val = x_train[0:]
+    y_val = y_train[0:]
 
-    # Inizialize the MODEL and print a summary
-    MODEL = get_model(input_shape=(200, 200, 24), CLASSES=len(CLASSES))
-    MODEL.summary()
+    # Inizialize the model and print a summary
+    model = get_model(input_shape=(200, 200, 24), classes=len(classes))
+    model.summary()
 
-    # Set hyperparameters, inizialize generators, and train the MODEL
+    # Set hyperparameters, inizialize generators, and train the model
     batch_size = args.batch_size
     num_epochs = args.epochs
 
     opt = SGD(lr=0.01, decay=1e-9, momentum=0.9, nesterov=True)
-    MODEL.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['acc', 'mse'])
+    model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['acc', 'mse'])
 
-    my_training_batch_generator = DataGenerator(X_TRAIN, Y_TRAIN, batch_size)
-    my_validation_batch_generator = DataGenerator(X_VAL, Y_VAL, batch_size)
+    my_training_batch_generator = DataGenerator(x_train, y_train, batch_size)
+    my_validation_batch_generator = DataGenerator(x_val, y_val, batch_size)
 
     # monitor = EarlyStopping(monitor='acc', patience=1)  # Not working as expected
 
-    custom_model = MODEL.fit_generator(generator=my_training_batch_generator,
+    custom_model = model.fit_generator(generator=my_training_batch_generator,
                                        validation_data=my_validation_batch_generator,
                                        epochs=num_epochs,
                                        verbose=1)
@@ -95,12 +95,12 @@ def main():
                               output_folder=output_folder, show_figure=False)
 
     # Visualizing of confusion matrix
-    custom_model_predicted = plot_confusion_matrix(MODEL, my_validation_batch_generator, Y_VAL,
-                                                   CLASSES, prefix=current_datetime,
+    custom_model_predicted = plot_confusion_matrix(model, my_validation_batch_generator, y_val,
+                                                   classes, prefix=current_datetime,
                                                    output_folder=output_folder, show_figure=False)
 
     # Metrics: precision, recall, f1-score, support
-    custom_model_report = classification_report(np.argmax(Y_TRAIN, axis=1), custom_model_predicted)
+    custom_model_report = classification_report(np.argmax(y_train, axis=1), custom_model_predicted)
     with open(os.path.join(output_folder, current_datetime+"_out.txt"), 'w') as file:
         file.write(custom_model_report)
 
