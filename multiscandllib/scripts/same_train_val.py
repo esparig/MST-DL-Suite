@@ -78,8 +78,10 @@ def main():
     batch_size = args.batch_size
     num_epochs = args.epochs
 
-    opt = SGD(lr=0.001, decay=1e-9, momentum=0.9, nesterov=True)
-    model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['acc', 'mse'])
+    model.compile(loss='categorical_crossentropy', optimizer="sgd", metrics=['acc', 'mse'])
+
+    # opt = SGD(lr=0.001, decay=1e-9, momentum=0.9, nesterov=True)
+    # model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['acc', 'mse'])
 
     my_training_batch_generator = DataGenerator(x_train, y_train, batch_size)
     my_validation_batch_generator = DataGenerator(x_val, y_val, batch_size)
