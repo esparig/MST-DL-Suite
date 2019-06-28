@@ -22,7 +22,7 @@ import sys
 sys.path.append('..')
 sys.path.append('.')
 
-from src.get_dataset import get_dataset, load_dataset
+from src.get_dataset import get_dataset
 from src.custom_model import get_model
 from src.data_generator import DataGenerator
 from src.plot_graphics import plot_performance_graphics, plot_confusion_matrix
@@ -105,8 +105,8 @@ def main():
     custom_model = model.fit_generator(generator=my_training_batch_generator,
                                        validation_data=my_validation_batch_generator,
                                        epochs=num_epochs,
-                                       #use_multiprocessing=True,
-                                       #workers=16,
+                                       use_multiprocessing=False,
+                                       workers=0, # If 0, will execute the generator on the main thread.
                                        callbacks=callback_list,
                                        verbose=1)
 

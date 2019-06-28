@@ -29,5 +29,4 @@ class TestModel(unittest.TestCase):
         """
         block1_conv2d = self.model.layers[0]
         weights = block1_conv2d.get_weights()
-        print(block1_conv2d.output_shape())
         self.assertEqual(len(weights[0][0][0]), 24)

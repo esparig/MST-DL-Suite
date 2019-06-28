@@ -98,7 +98,7 @@ X_TRAIN, Y_TRAIN, X_VAL, Y_VAL, _, _ = get_dataset(
     DS_PATH, percent_train=80, percent_val=20, percent_test=0)
 print(len(X_TRAIN), len(X_VAL))
 CLASSES = [folder.name for folder in DS_PATH.iterdir() if folder.is_dir()]
-MODEL = get_model(input_shape=(200, 200, 24), CLASSES=len(CLASSES))
+MODEL = get_model(input_shape=(200, 200, 24), classes=len(CLASSES))
 OPT = SGD(lr=0.01, decay=1e-9, momentum=0.9, nesterov=True)
 MODEL.compile(loss='categorical_crossentropy', optimizer=OPT, metrics=['acc', 'mse'])
 GEN_TRAIN = DataGenerator2(X_TRAIN, Y_TRAIN, 64)
