@@ -29,34 +29,37 @@ def main():
     parser = argparse.ArgumentParser(description='Example DL training.')
     parser.add_argument('--dataset', metavar='Dataset Path', type=str, required=True,
                         help='a string with the dataset path')
+    parser.add_argument('--output', metavar='Output Path', type=str, required=True,
+                        help='a string with the output path')
     parser.add_argument('--batch_size', metavar='Batch size', type=int, required=True,
                         help='an integer for the batch size')
     parser.add_argument('--epochs', metavar='Number of Epochs', type=int, required=True,
                         help='an integer for the numer of epochs')
-    parser.add_argument('--CLASSES', metavar='Selection of CLASSES in the dataset', nargs='+',
-                        help='CLASSES without quotes, separated by a white space')
+    parser.add_argument('--classes', metavar='Selection of classes in the dataset', nargs='+',
+                        help='classes without quotes, separated by a white space')
     args = parser.parse_args()
 
     print("Executing:", parser.prog)
     print("----------------------------------------")
     print("Dataset:", args.dataset)
+    print("Output path:", args.output)
     print("Batch Size:", args.batch_size)
     print("Epochs:", args.epochs)
-    print("Classes:", args.classes)
 
     # Get current script name
-    output_folder = parser.prog[:-3]+".results"
+    output_folder = args.output
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
     # Set dataset path
     dataset_path = Path(args.dataset)
 
-    # Set CLASSES
+    # Set classes
     if args.classes:
         classes = args.classes
     else:
         classes = [folder.name for folder in dataset_path.iterdir() if folder.is_dir()]
+    print("classes:", classes)
 
     # Get training, validation, and test datasets
     x_train, y_train, _, _, _, _ = get_dataset(dataset_path,
@@ -75,7 +78,7 @@ def main():
     batch_size = args.batch_size
     num_epochs = args.epochs
 
-    opt = SGD(lr=0.01, decay=1e-9, momentum=0.9, nesterov=True)
+    opt = SGD(lr=0.001, decay=1e-9, momentum=0.9, nesterov=True)
     model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['acc', 'mse'])
 
     my_training_batch_generator = DataGenerator(x_train, y_train, batch_size)
@@ -86,6 +89,7 @@ def main():
     custom_model = model.fit_generator(generator=my_training_batch_generator,
                                        validation_data=my_validation_batch_generator,
                                        epochs=num_epochs,
+                                       workers=0,
                                        verbose=1)
 
     # Plot performance graphics
