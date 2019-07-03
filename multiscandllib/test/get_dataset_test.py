@@ -3,7 +3,7 @@
 import unittest
 from pathlib import Path
 from numpy import argmax
-from multiscandllib.src.get_dataset import get_dataset
+from multiscandllib.src.get_dataset import get_dataset, serve_files, load_dataset
 
 
 class TestGetDataset(unittest.TestCase):
@@ -68,3 +68,6 @@ class TestGetDataset(unittest.TestCase):
         for pair in [(sample.parent.name, self.classes[argmax(label)])
                      for sample, label in zip(self.y, self.ly)]:
             self.assertEqual(pair[0], pair[1])
+            
+    def test_serve_files(self):
+        sf = serve_files
