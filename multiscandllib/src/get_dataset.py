@@ -81,7 +81,8 @@ def get_files(dataset_path: Path, classes: List[str], balanced: bool) -> Tuple(L
     - classes: A list of the classes we want to include in our dataset.
     - balanced: If balanced is set to True, then the number of examples for each class is balanced.
     Returns:
-    - A randomized list of paths to files.
+    - A randomized list of paths to files
+    - With its corresponding labels
     """
     files = []
     labels = []
@@ -90,13 +91,13 @@ def get_files(dataset_path: Path, classes: List[str], balanced: bool) -> Tuple(L
         files_by_category = defaultdict(list)
         min_examples = float('-Inf')
         for category in classes:
-            files_by_category[category].extend(
-                [file for file in dataset_path.joinpath(category).iterdir()])
+            files_by_category[category].extend(random.shuffle(
+                [file for file in dataset_path.joinpath(category).iterdir()]))
             num_examples = len(files_by_category[category])
             if num_examples < min_examples:
                 min_examples = num_examples
         for index_cat, category in enumerate(classes):
-            files.extend(files_by_category[category].sorted()[:min_examples]) # TO DO: needs to be randomized!!!!!
+            files.extend(files_by_category[category].sorted()[:min_examples])
             labels.extend([index_cat]*min_examples)
     else:
         for index_cat, category in classes:
@@ -108,7 +109,7 @@ def get_files(dataset_path: Path, classes: List[str], balanced: bool) -> Tuple(L
     random.shuffle(combined)
     files[:], labels[:] = zip(*combined)
 
-    return files, labels
+    return files, to_categorical(labels, len(classes))
 
 def serve_files(files: List[str], labels: List[int], quantity: int) -> Path:
     """Serve example paths and labels using yield, from the given lists.
@@ -117,7 +118,7 @@ def serve_files(files: List[str], labels: List[int], quantity: int) -> Path:
     - labels: list of labels (integer format)
     - quantity: to be served, if quantity is set to 0, yields remaining elements
     Retuns:
-    - tuple os lists (files labels) containing the specified quantity.
+    - tuple of lists (files labels) containing the specified quantity.
     """
     first = 0
     while first + quantity < len(labels):
