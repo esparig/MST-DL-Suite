@@ -8,7 +8,7 @@ from keras.optimizers import SGD
 sys.path.append('..')
 sys.path.append('.')
 
-from multiscandllib.src.get_dataset import serve_files, get_files
+from src.get_dataset import serve_files, get_files
 from src.read_arguments import Argument, read_arguments
 from src.custom_model import get_model
 from src.plot_graphics import plot_performance_graphics, plot_confusion_matrix

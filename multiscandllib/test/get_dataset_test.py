@@ -70,6 +70,10 @@ class TestGetDataset(unittest.TestCase):
             self.assertEqual(pair[0], pair[1])
 
     def test_serve_files(self):
-        files, labels = get_files(self.ds_path)
-        sf = serve_files(files, labels, 10)
-        print(sf)
+        """Test serve files function
+        """
+        files, labels = get_files(self.ds_path, self.classes, False)
+        sf1 = serve_files(files, labels, 10)
+        print("Served files")
+        print("------------")
+        print(type(sf1))

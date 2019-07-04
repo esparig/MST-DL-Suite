@@ -10,6 +10,8 @@ import numpy as np
 from keras.utils import to_categorical
 
 Dataset = Tuple[List[str], List[int], List[str], List[int], List[str], List[int]]
+Dataset_Tuple = Tuple[List[Path], List[List[int]]]
+
 
 def get_dataset(dataset_path: Path, percent_train: int=80, percent_val: int=10,
                 percent_test: int=10, classes: List[str]=None) -> Sequence[Dataset]:
@@ -73,7 +75,7 @@ def get_dataset(dataset_path: Path, percent_train: int=80, percent_val: int=10,
             val_ds_np.tolist(), to_categorical(val_labels_np.tolist(), num_classes=num_classes),
             test_ds_np.tolist(), to_categorical(test_labels_np.tolist(), num_classes=num_classes))
 
-def get_files(dataset_path: Path, classes: List[str], balanced: bool) -> Tuple(List[str], List[int]):
+def get_files(dataset_path: Path, classes: List[str], balanced: bool) -> Dataset_Tuple:
     """
     Get a list of files for our dataset.
     Arguments:
@@ -100,7 +102,7 @@ def get_files(dataset_path: Path, classes: List[str], balanced: bool) -> Tuple(L
             files.extend(files_by_category[category].sorted()[:min_examples])
             labels.extend([index_cat]*min_examples)
     else:
-        for index_cat, category in classes:
+        for index_cat, category in enumerate(classes):
             files_from_category = [file for file in dataset_path.joinpath(category).iterdir()]
             files.extend(files_from_category)
             labels.extend([index_cat]*len(files_from_category))
@@ -111,7 +113,7 @@ def get_files(dataset_path: Path, classes: List[str], balanced: bool) -> Tuple(L
 
     return files, to_categorical(labels, len(classes))
 
-def serve_files(files: List[str], labels: List[int], quantity: int) -> Path:
+def serve_files(files: List[str], labels: List[int], quantity: int) -> Dataset_Tuple:
     """Serve example paths and labels using yield, from the given lists.
     Arguments:
     - files: list of paths to examples
