@@ -91,15 +91,16 @@ def get_files(dataset_path: Path, classes: List[str], balanced: bool) -> Dataset
 
     if balanced:
         files_by_category = defaultdict(list)
-        min_examples = float('-Inf')
+        min_examples = float('Inf')
         for category in classes:
-            files_by_category[category].extend(random.shuffle(
-                [file for file in dataset_path.joinpath(category).iterdir()]))
+            files_from_category = [file for file in dataset_path.joinpath(category).iterdir()]
+            random.shuffle(files_from_category)
+            files_by_category[category].extend(files_from_category)
             num_examples = len(files_by_category[category])
             if num_examples < min_examples:
                 min_examples = num_examples
         for index_cat, category in enumerate(classes):
-            files.extend(files_by_category[category].sorted()[:min_examples])
+            files.extend(files_by_category[category][:min_examples])
             labels.extend([index_cat]*min_examples)
     else:
         for index_cat, category in enumerate(classes):
@@ -124,11 +125,11 @@ def serve_files(files: List[str], labels: List[int], quantity: int) -> Dataset_T
     """
     first = 0
     while first + quantity < len(labels):
-        yield (files[first:first + quantity], labels[first:first + quantity])
+        yield (load_dataset(files[first:first + quantity]), labels[first:first + quantity])
         first += quantity
     yield (files[first:], labels[first:])
 
-def load_dataset(x_files: List[str]) -> np.ndarray:
+def load_dataset(x_files: List[Path]) -> np.ndarray:
     """Load the given dataset files in memory
     """
     x_data = np.array([np.load(file_name).astype('float32') / 1023 for file_name in x_files])

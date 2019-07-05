@@ -16,6 +16,8 @@ class Argument(Enum):
     BATCH_SIZE = 3
     EPOCHS = 4
     CLASSES = 5
+    EXAMPLES = 6
+    LR = 7
 
 def read_arguments():
     """Read input arguments:
@@ -42,6 +44,10 @@ def read_arguments():
                         help='an integer for the numer of epochs')
     parser.add_argument('--classes', metavar='Selection of classes in the dataset', nargs='+',
                         help='classes without quotes, separated by a white space')
+    parser.add_argument('--examples', metavar='Number of examples', type=int, required=True,
+                        help='an integer for the number of examples for training')
+    parser.add_argument('--lr', metavar='Learning rate', type=float, required=True,
+                        help='a float value for the initial Learning rate used in SGD optimizer')
     args = parser.parse_args()
 
     print("Executing:", parser.prog)
@@ -50,6 +56,8 @@ def read_arguments():
     print("Output path:", args.output)
     print("Batch Size:", args.batch_size)
     print("Epochs:", args.epochs)
+    print("Examples:", args.examples)
+    print("Learning rate:", args.lr)
 
 
     # Get current script name
@@ -65,13 +73,15 @@ def read_arguments():
         classes = args.classes
     else:
         classes = [folder.name for folder in dataset_path.iterdir() if folder.is_dir()]
-    print("classes:", classes)
+    print("Classes:", classes)
 
-    arguments[Argument.PROG] = args.prog
+    arguments[Argument.PROG] = parser.prog
     arguments[Argument.DATASET] = dataset_path
     arguments[Argument.OUTPUT] = Path(args.output)
     arguments[Argument.BATCH_SIZE] = args.batch_size
     arguments[Argument.EPOCHS] = args.epochs
     arguments[Argument.CLASSES] = classes
+    arguments[Argument.EXAMPLES] = args.examples
+    arguments[Argument.LR] = args.lr
 
     return arguments

@@ -55,7 +55,12 @@ def plot_confusion_matrix(model, batch, labels, classes_names, prefix="",
                           output_folder=None, save_figure=True, show_figure=True):
     """Plot confusion matrix
     """
-    model_predicted = np.argmax(model.predict_generator(batch, verbose=1), axis=1)
+    # print(type(batch)) # <class 'numpy.ndarray'> | <class 'src.data_generator.DataGenerator'>
+    if isinstance(batch, np.ndarray):
+        model_predicted = np.argmax(model.predict_on_batch(batch), axis=1)
+    else:
+        model_predicted = np.argmax(model.predict_generator(batch, verbose=1), axis=1)
+
     model_df_cm = pd.DataFrame(
         confusion_matrix(np.argmax(labels, axis=1), model_predicted),
         classes_names, classes_names)

@@ -24,7 +24,7 @@ def main():
     arguments = read_arguments()
 
     files, labels = get_files(arguments[Argument.DATASET], arguments[Argument.CLASSES], True)
-    x_train, y_train = serve_files(files, labels, 1000)
+    x_train, y_train = next(serve_files(files, labels, arguments[Argument.EXAMPLES]))
 
     model = get_model(input_shape=(200, 200, 24), classes=len(arguments[Argument.CLASSES]))
     model.summary()
@@ -35,7 +35,7 @@ def main():
         # Pass the file handle in as a lambda function to make it callable
         model.summary(print_fn=lambda x: file.write(x + '\n'))
 
-    opt = SGD(lr=0.002, decay=1e-9, momentum=0.9, nesterov=True)
+    opt = SGD(lr=arguments[Argument.LR], decay=1e-9, momentum=0.9, nesterov=True)
     model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['acc', 'mse'])
 
     history = model.fit(x_train, y_train,
@@ -49,8 +49,8 @@ def main():
                               prefix=current_datetime,
                               output_folder=arguments[Argument.OUTPUT],
                               show_figure=False)
-    
-    x_test, y_test = serve_files(files, labels, 100)
+
+    x_test, y_test = next(serve_files(files, labels, 200))
     plot_confusion_matrix(model,
                           x_test,
                           y_test,
@@ -58,4 +58,6 @@ def main():
                           prefix=current_datetime,
                           output_folder=arguments[Argument.OUTPUT],
                           show_figure=False)
-    
+
+if __name__ == "__main__":
+    main()
