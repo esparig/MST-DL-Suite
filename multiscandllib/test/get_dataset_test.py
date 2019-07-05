@@ -3,7 +3,7 @@
 import unittest
 from pathlib import Path
 from numpy import argmax
-from multiscandllib.src.get_dataset import get_dataset
+from multiscandllib.src.get_dataset import get_dataset, serve_files, get_files
 
 
 class TestGetDataset(unittest.TestCase):
@@ -68,3 +68,26 @@ class TestGetDataset(unittest.TestCase):
         for pair in [(sample.parent.name, self.classes[argmax(label)])
                      for sample, label in zip(self.y, self.ly)]:
             self.assertEqual(pair[0], pair[1])
+
+    def test_serve_files(self):
+        """Test serve files function:
+        - Test if the generator serves the correct amount
+        - Test if the generator serves balanced sets when asked
+        """
+        all_files, all_labels = get_files(self.ds_path, self.classes, False)
+        sf_gen = serve_files(all_files, all_labels, 10)
+        files, labels = next(sf_gen)
+        print("Served files")
+        print("------------")
+        for file, label in zip(files, labels):
+            print(file, label)
+        self.assertTrue(len(files), 10)
+
+        all_files, all_labels = get_files(self.ds_path, self.classes, True)
+        sf_gen = serve_files(all_files, all_labels, len(self.classes)*5)
+        files, labels = next(sf_gen)
+        print("Served files")
+        print("------------")
+        for file, label in zip(files, labels):
+            print(file, label)
+        self.assertTrue(len(files), len(self.classes)*5)
