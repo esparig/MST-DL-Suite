@@ -84,7 +84,7 @@ def get_files(dataset_path: Path, classes: List[str], balanced: bool) -> Dataset
     - balanced: If balanced is set to True, then the number of examples for each class is balanced.
     Returns:
     - A randomized list of paths to files
-    - With its corresponding labels
+    - With its corresponding labels in categorical format
     """
     files = []
     labels = []
