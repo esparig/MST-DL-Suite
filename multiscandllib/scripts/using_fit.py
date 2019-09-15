@@ -10,7 +10,7 @@ sys.path.append('.')
 
 from src.get_dataset import serve_files, get_files
 from src.read_arguments import Argument, read_arguments
-from src.custom_model import get_model
+from src.custom_model import custom_model_01
 from src.plot_graphics import plot_performance_graphics, plot_confusion_matrix
 
 def main():
@@ -25,8 +25,10 @@ def main():
 
     files, labels = get_files(arguments[Argument.DATASET], arguments[Argument.CLASSES], True)
     x_train, y_train = next(serve_files(files, labels, arguments[Argument.EXAMPLES]))
+    # x_train.shape should be (nb_sample, height, width, channel)
 
-    model = get_model(input_shape=(200, 200, 24), classes=len(arguments[Argument.CLASSES]))
+    model = custom_model_01(input_shape=(x_train[0].shape),
+                            classes=len(arguments[Argument.CLASSES]))
     model.summary()
 
     current_datetime = str(datetime.datetime.now())

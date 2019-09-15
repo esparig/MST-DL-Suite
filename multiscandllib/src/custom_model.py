@@ -1,24 +1,30 @@
-"""Custom Models:
-Input shape: (200,200,24) to match our example shape (width, heigh, layers).
-Layers: 24 = (3HSI(color)+1I(nir))*6 views.
-classes: 9 being [agostadograve, agostadoleve, granizo, molestadograve, molestadoleve,
-molino, morada, picadodemosca, primera].
+"""Custom Models: This module contains different model creating functions.
 """
 from typing import Tuple
 
 from keras.models import Sequential
-from keras.layers import GaussianNoise
+from keras.layers import GaussianNoise, Activation, Dropout
 from keras.layers.core import Flatten, Dense
 from keras.layers.convolutional import Conv2D, MaxPooling2D
 from keras.layers.normalization import BatchNormalization
 
-def _custom_model_01(input_shape: Tuple[int, int, int], classes: int) -> Sequential:
-    """Custom model form by 7 blocks. Each block contains:
+def custom_model_01(input_shape: Tuple[int, int, int], classes: int) -> Sequential:
+    """Create a custom model formed by 7 blocks.
+
+    Each block contains:
     - Conv2D
     - BatchNormalization
     - GaussianNoise
     - MaxPooling2D
-    Followed by the classification block.
+
+    After these blocks a classification block is added.
+
+    Args:
+        input_shape: The input shape (ex: (100, 100, 3))
+        classes: Number of classes
+
+    Returns:
+        model: The created model
     """
 
     model = Sequential()
@@ -72,8 +78,44 @@ def _custom_model_01(input_shape: Tuple[int, int, int], classes: int) -> Sequent
 
     return model
 
+def custom_model_02(input_shape: Tuple[int, int, int]) -> Sequential:
+    """Create a custom model for binary classification formed by 3 blocks.
 
-def get_model(input_shape: Tuple[int, int, int], classes: int) -> Sequential:
-    """Caller function to create the Model.
+    Each block contains:
+    - Conv2D
+    - MaxPooling2D
+
+    After these blocks a classification block is added.
+
+    Args:
+        input_shape: The input shape (ex: (100, 100, 3))
+
+    Returns:
+        model: The created model
     """
-    return _custom_model_01(input_shape = input_shape, classes = classes)
+
+    model = Sequential()
+    # Block 1
+    model.add(Conv2D(32, (3, 3), padding="same", name='block1_conv1', input_shape=input_shape))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool'))  # to 100x100
+
+    # Block 2
+    model.add(Conv2D(64, (3, 3), padding='same', name='block2_conv1'))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool'))  # to 50x50
+
+    # Block 3
+    model.add(Conv2D(128, (3, 3), padding='same', name='block3_conv1'))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D((2, 2), strides=(2, 2), name='block3_pool'))  # to 25x25
+
+    # Classification block
+    model.add(Flatten(name='flatten'))
+    model.add(Dense(64, name='fc1'))
+    model.add(Activation('relu'))
+    model.add(Dropout(0.5))
+    model.add(Dense(1))
+    model.add(Activation('sigmoid'))
+
+    return model

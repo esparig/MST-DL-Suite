@@ -28,6 +28,8 @@ def read_arguments():
     --epochs <num of epochs to perform>
     --classes [Optional, list of classes] If it isn't specified, all the classes
     inside the dataset path are used
+    --examples <num of examples to employ>
+    --lr <learning rate>
 
     Returns a dict with the arguments.
     """
@@ -44,7 +46,7 @@ def read_arguments():
                         help='an integer for the numer of epochs')
     parser.add_argument('--classes', metavar='Selection of classes in the dataset', nargs='+',
                         help='classes without quotes, separated by a white space')
-    parser.add_argument('--examples', metavar='Number of examples', type=int, required=True,
+    parser.add_argument('--examples', metavar='Number of examples', type=int, required=False,
                         help='an integer for the number of examples for training')
     parser.add_argument('--lr', metavar='Learning rate', type=float, required=True,
                         help='a float value for the initial Learning rate used in SGD optimizer')
