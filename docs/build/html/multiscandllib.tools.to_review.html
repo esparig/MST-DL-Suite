@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>multiscandllib.tools.to_review package &mdash; MST-DL-Suite  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MST-DL-Suite
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">multiscandllib.tools.to_review package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.tools.to_review.BMPtoJPG">multiscandllib.tools.to_review.BMPtoJPG module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.tools.to_review.BMPtoPNG">multiscandllib.tools.to_review.BMPtoPNG module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.tools.to_review.autolabel">multiscandllib.tools.to_review.autolabel module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.tools.to_review.characteristics_distribution">multiscandllib.tools.to_review.characteristics_distribution module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.tools.to_review.copy_examples">multiscandllib.tools.to_review.copy_examples module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.tools.to_review.create_dataset_old">multiscandllib.tools.to_review.create_dataset_old module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.tools.to_review.create_numpy_int16">multiscandllib.tools.to_review.create_numpy_int16 module</a></li>
+<li><a class="reference internal" href="#multiscandllib-tools-to-review-create-test-dataset-module">multiscandllib.tools.to_review.create_test_dataset module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.tools.to_review.data_aug">multiscandllib.tools.to_review.data_aug module</a></li>
+<li><a class="reference internal" href="#multiscandllib-tools-to-review-inspect-images-module">multiscandllib.tools.to_review.inspect_images module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.tools.to_review.merge_category_folders">multiscandllib.tools.to_review.merge_category_folders module</a></li>
+<li><a class="reference internal" href="#multiscandllib-tools-to-review-mynumpy-shift-module">multiscandllib.tools.to_review.mynumpy_shift module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.tools.to_review.num_views">multiscandllib.tools.to_review.num_views module</a></li>
+<li><a class="reference internal" href="#multiscandllib-tools-to-review-plot-image-module">multiscandllib.tools.to_review.plot_image module</a></li>
+<li><a class="reference internal" href="#multiscandllib-tools-to-review-plot-numpy-module">multiscandllib.tools.to_review.plot_numpy module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.tools.to_review.pretty_json">multiscandllib.tools.to_review.pretty_json module</a></li>
+<li><a class="reference internal" href="#multiscandllib-tools-to-review-simple-shift-module">multiscandllib.tools.to_review.simple_shift module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.tools.to_review.test_shift">multiscandllib.tools.to_review.test_shift module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.tools.to_review">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MST-DL-Suite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>multiscandllib.tools.to_review package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/multiscandllib.tools.to_review.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="multiscandllib-tools-to-review-package">
+<h1>multiscandllib.tools.to_review package<a class="headerlink" href="#multiscandllib-tools-to-review-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-multiscandllib.tools.to_review.BMPtoJPG">
+<span id="multiscandllib-tools-to-review-bmptojpg-module"></span><h2>multiscandllib.tools.to_review.BMPtoJPG module<a class="headerlink" href="#module-multiscandllib.tools.to_review.BMPtoJPG" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.BMPtoJPG.bmp_to_jpg">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.BMPtoJPG.</code><code class="sig-name descname">bmp_to_jpg</code><span class="sig-paren">(</span><em class="sig-param">data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.BMPtoJPG.bmp_to_jpg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new folder including all images in JPG format</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-multiscandllib.tools.to_review.BMPtoPNG">
+<span id="multiscandllib-tools-to-review-bmptopng-module"></span><h2>multiscandllib.tools.to_review.BMPtoPNG module<a class="headerlink" href="#module-multiscandllib.tools.to_review.BMPtoPNG" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.BMPtoPNG.bmp_to_png">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.BMPtoPNG.</code><code class="sig-name descname">bmp_to_png</code><span class="sig-paren">(</span><em class="sig-param">data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.BMPtoPNG.bmp_to_png" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new folder including all images in png format</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-multiscandllib.tools.to_review.autolabel">
+<span id="multiscandllib-tools-to-review-autolabel-module"></span><h2>multiscandllib.tools.to_review.autolabel module<a class="headerlink" href="#module-multiscandllib.tools.to_review.autolabel" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.autolabel.autolabel">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.autolabel.</code><code class="sig-name descname">autolabel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.autolabel.autolabel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-multiscandllib.tools.to_review.characteristics_distribution">
+<span id="multiscandllib-tools-to-review-characteristics-distribution-module"></span><h2>multiscandllib.tools.to_review.characteristics_distribution module<a class="headerlink" href="#module-multiscandllib.tools.to_review.characteristics_distribution" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.characteristics_distribution.main">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.characteristics_distribution.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.characteristics_distribution.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.characteristics_distribution.print_json">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.characteristics_distribution.</code><code class="sig-name descname">print_json</code><span class="sig-paren">(</span><em class="sig-param">jfile</em>, <em class="sig-param">characteristic</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.characteristics_distribution.print_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-multiscandllib.tools.to_review.copy_examples">
+<span id="multiscandllib-tools-to-review-copy-examples-module"></span><h2>multiscandllib.tools.to_review.copy_examples module<a class="headerlink" href="#module-multiscandllib.tools.to_review.copy_examples" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.copy_examples.copy_category_examples">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.copy_examples.</code><code class="sig-name descname">copy_category_examples</code><span class="sig-paren">(</span><em class="sig-param">frompath</em>, <em class="sig-param">category</em>, <em class="sig-param">topath</em>, <em class="sig-param">flag_cpy</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.copy_examples.copy_category_examples" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.copy_examples.main">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.copy_examples.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.copy_examples.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-multiscandllib.tools.to_review.create_dataset_old">
+<span id="multiscandllib-tools-to-review-create-dataset-old-module"></span><h2>multiscandllib.tools.to_review.create_dataset_old module<a class="headerlink" href="#module-multiscandllib.tools.to_review.create_dataset_old" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.create_dataset_old.create_dataset">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.create_dataset_old.</code><code class="sig-name descname">create_dataset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.create_dataset_old.create_dataset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.create_dataset_old.get_10_layers">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.create_dataset_old.</code><code class="sig-name descname">get_10_layers</code><span class="sig-paren">(</span><em class="sig-param">layers</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.create_dataset_old.get_10_layers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.create_dataset_old.main">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.create_dataset_old.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.create_dataset_old.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-multiscandllib.tools.to_review.create_numpy_int16">
+<span id="multiscandllib-tools-to-review-create-numpy-int16-module"></span><h2>multiscandllib.tools.to_review.create_numpy_int16 module<a class="headerlink" href="#module-multiscandllib.tools.to_review.create_numpy_int16" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.create_numpy_int16.check_views">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.create_numpy_int16.</code><code class="sig-name descname">check_views</code><span class="sig-paren">(</span><em class="sig-param">data_src</em>, <em class="sig-param">category</em>, <em class="sig-param">id</em>, <em class="sig-param">json_fn</em>, <em class="sig-param">num_views=5</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.create_numpy_int16.check_views" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.create_numpy_int16.gen_dataset_12views">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.create_numpy_int16.</code><code class="sig-name descname">gen_dataset_12views</code><span class="sig-paren">(</span><em class="sig-param">data_src</em>, <em class="sig-param">data_dst</em>, <em class="sig-param">src_num_views</em>, <em class="sig-param">write=0</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.create_numpy_int16.gen_dataset_12views" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.create_numpy_int16.get_nearest_indexes">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.create_numpy_int16.</code><code class="sig-name descname">get_nearest_indexes</code><span class="sig-paren">(</span><em class="sig-param">n</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.create_numpy_int16.get_nearest_indexes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.create_numpy_int16.list_views">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.create_numpy_int16.</code><code class="sig-name descname">list_views</code><span class="sig-paren">(</span><em class="sig-param">data_src</em>, <em class="sig-param">category</em>, <em class="sig-param">id</em>, <em class="sig-param">json_fn</em>, <em class="sig-param">max_views=6</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.create_numpy_int16.list_views" title="Permalink to this definition">¶</a></dt>
+<dd><p>views_info = None
+with open(json_fn) as f:</p>
+<blockquote>
+<div><p>json_data = json.load(f)
+views_info = json_data[“views”]</p>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="multiscandllib-tools-to-review-create-test-dataset-module">
+<h2>multiscandllib.tools.to_review.create_test_dataset module<a class="headerlink" href="#multiscandllib-tools-to-review-create-test-dataset-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-multiscandllib.tools.to_review.data_aug">
+<span id="multiscandllib-tools-to-review-data-aug-module"></span><h2>multiscandllib.tools.to_review.data_aug module<a class="headerlink" href="#module-multiscandllib.tools.to_review.data_aug" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="multiscandllib-tools-to-review-inspect-images-module">
+<h2>multiscandllib.tools.to_review.inspect_images module<a class="headerlink" href="#multiscandllib-tools-to-review-inspect-images-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-multiscandllib.tools.to_review.merge_category_folders">
+<span id="multiscandllib-tools-to-review-merge-category-folders-module"></span><h2>multiscandllib.tools.to_review.merge_category_folders module<a class="headerlink" href="#module-multiscandllib.tools.to_review.merge_category_folders" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.merge_category_folders.main">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.merge_category_folders.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.merge_category_folders.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.merge_category_folders.merge_folders_by_category">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.merge_category_folders.</code><code class="sig-name descname">merge_folders_by_category</code><span class="sig-paren">(</span><em class="sig-param">frompath</em>, <em class="sig-param">categories</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.merge_category_folders.merge_folders_by_category" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="multiscandllib-tools-to-review-mynumpy-shift-module">
+<h2>multiscandllib.tools.to_review.mynumpy_shift module<a class="headerlink" href="#multiscandllib-tools-to-review-mynumpy-shift-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-multiscandllib.tools.to_review.num_views">
+<span id="multiscandllib-tools-to-review-num-views-module"></span><h2>multiscandllib.tools.to_review.num_views module<a class="headerlink" href="#module-multiscandllib.tools.to_review.num_views" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.num_views.check_nfiles">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.num_views.</code><code class="sig-name descname">check_nfiles</code><span class="sig-paren">(</span><em class="sig-param">dir_path</em>, <em class="sig-param">category</em>, <em class="sig-param">id</em>, <em class="sig-param">views</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.num_views.check_nfiles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.num_views.create_dataframe">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.num_views.</code><code class="sig-name descname">create_dataframe</code><span class="sig-paren">(</span><em class="sig-param">dir_path</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.num_views.create_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.num_views.main">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.num_views.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.num_views.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.num_views.read_samples_csv">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.num_views.</code><code class="sig-name descname">read_samples_csv</code><span class="sig-paren">(</span><em class="sig-param">dir_path</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.num_views.read_samples_csv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.num_views.write_samples_csv">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.num_views.</code><code class="sig-name descname">write_samples_csv</code><span class="sig-paren">(</span><em class="sig-param">dir_path</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.num_views.write_samples_csv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="multiscandllib-tools-to-review-plot-image-module">
+<h2>multiscandllib.tools.to_review.plot_image module<a class="headerlink" href="#multiscandllib-tools-to-review-plot-image-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="multiscandllib-tools-to-review-plot-numpy-module">
+<h2>multiscandllib.tools.to_review.plot_numpy module<a class="headerlink" href="#multiscandllib-tools-to-review-plot-numpy-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-multiscandllib.tools.to_review.pretty_json">
+<span id="multiscandllib-tools-to-review-pretty-json-module"></span><h2>multiscandllib.tools.to_review.pretty_json module<a class="headerlink" href="#module-multiscandllib.tools.to_review.pretty_json" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.pretty_json.main">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.pretty_json.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.pretty_json.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.pretty_json.print_json">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.pretty_json.</code><code class="sig-name descname">print_json</code><span class="sig-paren">(</span><em class="sig-param">jfile</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.pretty_json.print_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="multiscandllib-tools-to-review-simple-shift-module">
+<h2>multiscandllib.tools.to_review.simple_shift module<a class="headerlink" href="#multiscandllib-tools-to-review-simple-shift-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-multiscandllib.tools.to_review.test_shift">
+<span id="multiscandllib-tools-to-review-test-shift-module"></span><h2>multiscandllib.tools.to_review.test_shift module<a class="headerlink" href="#module-multiscandllib.tools.to_review.test_shift" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="multiscandllib.tools.to_review.test_shift.My_Generator">
+<em class="property">class </em><code class="sig-prename descclassname">multiscandllib.tools.to_review.test_shift.</code><code class="sig-name descname">My_Generator</code><span class="sig-paren">(</span><em class="sig-param">image_filenames</em>, <em class="sig-param">labels</em>, <em class="sig-param">batch_size</em>, <em class="sig-param">seq</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.test_shift.My_Generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">keras.utils.Sequence</span></code></p>
+<dl class="method">
+<dt id="multiscandllib.tools.to_review.test_shift.My_Generator.test">
+<code class="sig-name descname">test</code><span class="sig-paren">(</span><em class="sig-param">img</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.test_shift.My_Generator.test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="multiscandllib.tools.to_review.test_shift.My_Generator.transform">
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.test_shift.My_Generator.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.test_shift.create_filenames_and_labels">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.test_shift.</code><code class="sig-name descname">create_filenames_and_labels</code><span class="sig-paren">(</span><em class="sig-param">dataset_path</em>, <em class="sig-param">percent_train=80</em>, <em class="sig-param">percent_val=10</em>, <em class="sig-param">percent_test=10</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.test_shift.create_filenames_and_labels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.tools.to_review.test_shift.show">
+<code class="sig-prename descclassname">multiscandllib.tools.to_review.test_shift.</code><code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param">my_npy</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.tools.to_review.test_shift.show" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-multiscandllib.tools.to_review">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-multiscandllib.tools.to_review" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, E. Parcero
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

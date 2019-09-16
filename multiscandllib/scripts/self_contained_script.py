@@ -1,5 +1,7 @@
 """Example using:
+
 - custom_model_01: 7 blocks of Conv2D+BN+GN+MP
+
 - dataset using 12 views (24 layers of depth)
 
 Date: 20190613
@@ -21,10 +23,15 @@ from keras.utils import Sequence
 
 def get_model(input_shape: Tuple[int, int, int], classes: int) -> Sequential:
     """Custom model form by 7 blocks. Each block contains:
+    
     - Conv2D
+    
     - BatchNormalization
+    
     - GaussianNoise
+    
     - MaxPooling2D
+    
     Followed by the classification block.
     """
 
@@ -120,7 +127,7 @@ class DummyGenerator(Sequence):
         return (rdm_batch, rdm_labels)
 
 def main():
-    """Main function
+    """Main function.
     """
 
     # Inizialize the model and print a summary

@@ -1,0 +1,61 @@
+multiscandllib.scripts package
+==============================
+
+Submodules
+----------
+multiscandllib.scripts.example\_template module
+-------------------------------------------------
+
+.. automodule:: multiscandllib.scripts.example_3_classes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   
+multiscandllib.scripts.example\_3\_classes module
+-------------------------------------------------
+
+.. automodule:: multiscandllib.scripts.example_3_classes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.scripts.parallel\_example\_3\_classes module
+-----------------------------------------------------------
+
+.. automodule:: multiscandllib.scripts.parallel_example_3_classes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.scripts.same\_train\_val module
+----------------------------------------------
+
+.. automodule:: multiscandllib.scripts.same_train_val
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.scripts.self\_contained\_script module
+-----------------------------------------------------
+
+.. automodule:: multiscandllib.scripts.self_contained_script
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.scripts.using\_fit module
+----------------------------------------
+
+.. automodule:: multiscandllib.scripts.using_fit
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: multiscandllib.scripts
+   :members:
+   :undoc-members:
+   :show-inheritance:

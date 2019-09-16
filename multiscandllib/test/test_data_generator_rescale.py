@@ -1,11 +1,10 @@
-"""Test normalization inside Data Generator:
-What method does take less?
-Comparison of times between np.interp and /1023.
-
-Results for 10 epochs:
-    Using np.interp: 189.77499961853027
-    Using \1023: 173.77592372894287
 """
+.. module:: test_data_generator_rescale
+    :synopsis: unit testing for core components
+ 
+.. moduleauthor:: E. Parcero
+"""
+
 import random
 import time
 from pathlib import Path
@@ -125,6 +124,14 @@ class DataGenerator2(Sequence):
 
         return result
 
+"""Test normalization inside Data Generator:
+What method does take less?
+Comparison of times between np.interp and /1023.
+
+Results for 10 epochs:
+    Using np.interp: 189.77499961853027
+    Using \1023: 173.77592372894287
+"""
 DS_PATH = Path("/media/deeplearning/SSD2TB/mini_dataset_3cats")
 X_TRAIN, Y_TRAIN, X_VAL, Y_VAL, _, _ = get_dataset(
     DS_PATH, percent_train=80, percent_val=20, percent_test=0)

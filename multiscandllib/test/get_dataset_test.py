@@ -1,4 +1,8 @@
-"""Test get_dataset.py
+"""
+.. module:: get_dataset_test
+    :synopsis: unit testing for core components
+ 
+.. moduleauthor:: E. Parcero
 """
 import unittest
 from pathlib import Path
@@ -7,7 +11,7 @@ from multiscandllib.src.get_dataset import get_dataset, serve_files, get_files
 
 
 class TestGetDataset(unittest.TestCase):
-    """Test Class for get_dataset.py
+    """Test Class for get_dataset.py.
     """
 
     def setUp(self):
@@ -17,7 +21,7 @@ class TestGetDataset(unittest.TestCase):
         self.classes = [folder.name for folder in self.ds_path.iterdir() if folder.is_dir()]
 
     def test_warning(self):
-        """Test if warning is showed
+        """Test if warning is showed.
         """
         self.assertWarns(Warning,
                          get_dataset,
@@ -55,15 +59,13 @@ class TestGetDataset(unittest.TestCase):
         self.assertEqual(set_from_get_dataset, set_from_folder)
 
     def test_dataset_independent(self):
-        """Test if the returned dataset contains different
-        files in training, validation, and test subsets
+        """Test if the returned dataset contains different files in training, validation, and test subsets.
         """
         set_from_get_dataset = set([*self.x, *self.y, *self.z])
         self.assertTrue(len(self.x)+len(self.y)+len(self.z) == len(set_from_get_dataset))
 
     def test_dataset_labels(self):
-        """Test if the returned dataset is
-        correctly labelled
+        """Test if the returned dataset is correctly labeled.
         """
         for pair in [(sample.parent.name, self.classes[argmax(label)])
                      for sample, label in zip(self.y, self.ly)]:
@@ -71,7 +73,9 @@ class TestGetDataset(unittest.TestCase):
 
     def test_serve_files(self):
         """Test serve files function:
+        
         - Test if the generator serves the correct amount
+        
         - Test if the generator serves balanced sets when asked
         """
         all_files, all_labels = get_files(self.ds_path, self.classes, False)

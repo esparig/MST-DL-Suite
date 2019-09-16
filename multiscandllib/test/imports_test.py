@@ -1,4 +1,8 @@
-"""Try to import my modules
+"""
+.. module:: imports_test
+    :synopsis: unit testing for core components
+ 
+.. moduleauthor:: E. Parcero
 """
 import unittest
 
@@ -8,7 +12,7 @@ from multiscandllib.src.data_generator import DataGenerator
 from multiscandllib.src.plot_graphics import plot_performance_graphics
 
 class TestMultiscanDLLib(unittest.TestCase):
-    """Test Class for MultiscanDLLib
+    """Test Class for MultiscanDLLib.
     """
 
     def test_imports(self):

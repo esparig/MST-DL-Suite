@@ -1,6 +1,8 @@
-"""Managing of the arguments, usually called at the beginning of a script:
-- Argument Enum.
-- Read Arguments funciton.
+"""
+.. module:: read_arguments
+    :synopsis: read arguments from CLI
+ 
+.. moduleauthor:: E. Parcero
 """
 import os
 import argparse
@@ -8,7 +10,7 @@ from enum import Enum
 from pathlib import Path
 
 class Argument(Enum):
-    """Enum class to specify the possible fields in the arguments
+    """Enum class to specify the possible fields in the arguments.
     """
     PROG = 0
     DATASET = 1
@@ -20,18 +22,18 @@ class Argument(Enum):
     LR = 7
 
 def read_arguments():
-    """Read input arguments:
+    """Read input arguments::
 
     --dataset <path to the dataset>
-    --output <path to the output folder> The folder is created if not exists
+    --output <path to the output folder> #The folder is created if not exists
     --batch_size <desired batch size, typically 32 or 64>
     --epochs <num of epochs to perform>
-    --classes [Optional, list of classes] If it isn't specified, all the classes
-    inside the dataset path are used
+    --classes [Optional, list of classes] # default: folder names
     --examples <num of examples to employ>
     --lr <learning rate>
 
-    Returns a dict with the arguments.
+    Return:
+        A dictionary with the arguments.
     """
     arguments = {}
     # Argument Parser

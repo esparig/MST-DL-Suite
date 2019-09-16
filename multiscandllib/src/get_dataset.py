@@ -1,5 +1,8 @@
 """
-Generation of train, validation, and test datasets
+.. module:: get_dataset
+    :synopsis: get lists of paths to the dataset
+ 
+.. moduleauthor:: E. Parcero
 """
 import warnings
 import random
@@ -16,13 +19,27 @@ Dataset_Tuple = Tuple[List[Path], List[List[int]]]
 def get_dataset(dataset_path: Path, percent_train: int=80, percent_val: int=10,
                 percent_test: int=10, classes: List[str]=None) -> Sequence[Dataset]:
     """
-    Gets filename and label lists of samples
+    Gets filename and label lists of samples.
+    
+    Args:
+        percent_train: (default 80)
+        
+        percent_val: (default 10)
+        
+        percent_test: (default 10)
 
-    percent_train: default 80
-    percent_val: default 10
-    percent_test: default 10
-
-    return (training_ds, training_labels, val_ds, val_labels, test_ds, test_labels)
+    Return:
+        training_ds: List of paths to the training dataset
+        
+        training_labels: List of labels of the training examples
+        
+        val_ds: List of paths to the validation dataset
+        
+        val_labels: List of labels of the validation examples
+        
+        test_ds: List of paths to the test dataset
+        
+        test_labels: List of labels of the test examples
     """
     if (percent_train + percent_val + percent_test) != 100:
         percent_train, percent_val, percent_test = 80, 10, 10
@@ -78,13 +95,16 @@ def get_dataset(dataset_path: Path, percent_train: int=80, percent_val: int=10,
 def get_files(dataset_path: Path, classes: List[str], balanced: bool) -> Dataset_Tuple:
     """
     Get a list of files for our dataset.
-    Arguments:
-    - dataset_path: A Path to the folder where the files are stored.
-    - classes: A list of the classes we want to include in our dataset.
-    - balanced: If balanced is set to True, then the number of examples for each class is balanced.
-    Returns:
-    - A randomized list of paths to files
-    - With its corresponding labels in categorical format
+    
+    Args:
+        dataset_path: A Path to the folder where the files are stored
+        
+        classes: A list of the classes we want to include in our dataset
+        
+        balanced: If balanced is set to True, then the number of examples for each class is balanced
+        
+    Return:
+        A randomized list of paths to files with its corresponding labels in categorical format
     """
     files = []
     labels = []
@@ -116,12 +136,16 @@ def get_files(dataset_path: Path, classes: List[str], balanced: bool) -> Dataset
 
 def serve_files(files: List[str], labels: List[int], quantity: int) -> Dataset_Tuple:
     """Serve example paths and labels using yield, from the given lists.
-    Arguments:
-    - files: list of paths to examples
-    - labels: list of labels (integer format)
-    - quantity: to be served, if quantity is set to 0, yields remaining elements
-    Retuns:
-    - tuple of lists (files labels) containing the specified quantity.
+    
+    Args:
+        files: List of paths to examples
+        
+        labels: List of labels (integer format)
+        
+        quantity: Quantity to be served, if quantity is set to 0, yields remaining elements
+        
+    Return:
+        Tuple of lists (files labels) containing the specified quantity
     """
     first = 0
     while first + quantity < len(labels):
@@ -131,6 +155,12 @@ def serve_files(files: List[str], labels: List[int], quantity: int) -> Dataset_T
 
 def load_dataset(x_files: List[Path]) -> np.ndarray:
     """Load the given dataset files in memory
+    
+    Args:
+        x_files: List of paths to dataset
+    
+    Return:
+        Numpy array containing the dataset
     """
     x_data = np.array([np.load(file_name).astype('float32') / 1023 for file_name in x_files])
     return x_data

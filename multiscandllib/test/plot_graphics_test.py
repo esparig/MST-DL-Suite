@@ -1,11 +1,15 @@
-"""Test plot_graphics.py
+"""
+.. module:: plot_graphic_test
+    :synopsis: unit testing for core components
+ 
+.. moduleauthor:: E. Parcero
 """
 import unittest
 from multiscandllib.src.plot_graphics import plot_performance_graphics, plot_confusion_matrix
 
 
 class TestGetDataset(unittest.TestCase):
-    """Test Class for plot_graphics.py
+    """Test Class for plot_graphics.py.
     """
 
     def setUp(self):

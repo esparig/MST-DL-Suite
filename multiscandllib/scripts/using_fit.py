@@ -15,10 +15,15 @@ from src.plot_graphics import plot_performance_graphics, plot_confusion_matrix
 
 def main():
     """Main function:
+    
     - read_arguments
+    
     - get_dataset
+    
     - get_model
+    
     - train
+    
     - evaluate
     """
     arguments = read_arguments()

@@ -1,0 +1,29 @@
+multiscandllib.tools package
+============================
+
+Subpackages
+-----------
+
+.. toctree::
+
+   multiscandllib.tools.to_review
+
+Submodules
+----------
+
+multiscandllib.tools.open\_numpy module
+---------------------------------------
+
+.. automodule:: multiscandllib.tools.open_numpy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: multiscandllib.tools
+   :members:
+   :undoc-members:
+   :show-inheritance:

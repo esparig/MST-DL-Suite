@@ -1,4 +1,8 @@
-"""Test keras model
+"""
+.. module:: model_test
+    :synopsis: unit testing for core components
+ 
+.. moduleauthor:: E. Parcero
 """
 import unittest
 from pathlib import Path
@@ -8,7 +12,7 @@ from multiscandllib.src.data_generator import DataGenerator
 
 
 class TestModel(unittest.TestCase):
-    """Test Keras Model
+    """Test Keras Model.
     """
 
     def setUp(self):
@@ -25,7 +29,7 @@ class TestModel(unittest.TestCase):
                                                 epochs=1,
                                                 verbose=1)
     def test_model(self):
-        """Test shape of output wights, should have a 24 somewhere
+        """Test shape of output wights, should have a 24 somewhere.
         """
         block1_conv2d = self.model.layers[0]
         weights = block1_conv2d.get_weights()

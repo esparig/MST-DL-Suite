@@ -1,0 +1,20 @@
+multiscandllib package
+======================
+
+Subpackages
+-----------
+
+.. toctree::
+
+   multiscandllib.scripts
+   multiscandllib.src
+   multiscandllib.test
+   multiscandllib.tools
+
+Module contents
+---------------
+
+.. automodule:: multiscandllib
+   :members:
+   :undoc-members:
+   :show-inheritance:

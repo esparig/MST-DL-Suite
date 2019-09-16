@@ -1,0 +1,54 @@
+multiscandllib.src package
+==========================
+
+Submodules
+----------
+
+multiscandllib.src.custom\_model module
+---------------------------------------
+
+.. automodule:: multiscandllib.src.custom_model
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.src.data\_generator module
+-----------------------------------------
+
+.. automodule:: multiscandllib.src.data_generator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.src.get\_dataset module
+--------------------------------------
+
+.. automodule:: multiscandllib.src.get_dataset
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.src.plot\_graphics module
+----------------------------------------
+
+.. automodule:: multiscandllib.src.plot_graphics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.src.read\_arguments module
+-----------------------------------------
+
+.. automodule:: multiscandllib.src.read_arguments
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: multiscandllib.src
+   :members:
+   :undoc-members:
+   :show-inheritance:

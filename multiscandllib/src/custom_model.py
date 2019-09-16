@@ -1,4 +1,8 @@
-"""Custom Models: This module contains different model creating functions.
+"""
+.. module:: custom_model
+    :synopsis: model creating functions
+ 
+.. moduleauthor:: E. Parcero
 """
 from typing import Tuple
 
@@ -12,6 +16,7 @@ def custom_model_01(input_shape: Tuple[int, int, int], classes: int) -> Sequenti
     """Create a custom model formed by 7 blocks.
 
     Each block contains:
+    
     - Conv2D
     - BatchNormalization
     - GaussianNoise
@@ -21,6 +26,7 @@ def custom_model_01(input_shape: Tuple[int, int, int], classes: int) -> Sequenti
 
     Args:
         input_shape: The input shape (ex: (100, 100, 3))
+        
         classes: Number of classes
 
     Returns:
@@ -82,6 +88,7 @@ def custom_model_02(input_shape: Tuple[int, int, int]) -> Sequential:
     """Create a custom model for binary classification formed by 3 blocks.
 
     Each block contains:
+    
     - Conv2D
     - MaxPooling2D
 
@@ -119,3 +126,6 @@ def custom_model_02(input_shape: Tuple[int, int, int]) -> Sequential:
     model.add(Activation('sigmoid'))
 
     return model
+
+def get_model(input_shape: Tuple[int, int, int], classes: int) -> Sequential:
+    return custom_model_01(input_shape, classes)

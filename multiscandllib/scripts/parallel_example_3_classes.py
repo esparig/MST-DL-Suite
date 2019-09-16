@@ -1,8 +1,13 @@
 """Example using:
+
 - custom_model_01: 7 blocks of Conv2D+BN+GN+MP
+
 - dataset using 12 views (24 layers of depth)
+
 - number of CLASSES is 3
+
 - batch ize is 64
+
 - number of epochs is 10.
 
 Date: 20190531
@@ -28,7 +33,7 @@ from src.plot_graphics import plot_performance_graphics, plot_confusion_matrix
 
 
 def main():
-    """Main function
+    """Main function.
     """
     # Argument Parser
     parser = argparse.ArgumentParser(description='Example DL training.')

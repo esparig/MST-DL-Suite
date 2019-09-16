@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>multiscandllib.src package &mdash; MST-DL-Suite  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MST-DL-Suite
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">multiscandllib.src package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.src.custom_model">multiscandllib.src.custom_model module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.src.data_generator">multiscandllib.src.data_generator module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.src.get_dataset">multiscandllib.src.get_dataset module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.src.plot_graphics">multiscandllib.src.plot_graphics module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.src.read_arguments">multiscandllib.src.read_arguments module</a></li>
+<li><a class="reference internal" href="#module-multiscandllib.src">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MST-DL-Suite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>multiscandllib.src package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/multiscandllib.src.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="multiscandllib-src-package">
+<h1>multiscandllib.src package<a class="headerlink" href="#multiscandllib-src-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-multiscandllib.src.custom_model">
+<span id="multiscandllib-src-custom-model-module"></span><h2>multiscandllib.src.custom_model module<a class="headerlink" href="#module-multiscandllib.src.custom_model" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-custom_model"></span><dl class="function">
+<dt id="multiscandllib.src.custom_model.custom_model_01">
+<code class="sig-prename descclassname">multiscandllib.src.custom_model.</code><code class="sig-name descname">custom_model_01</code><span class="sig-paren">(</span><em class="sig-param">input_shape: Tuple[int, int, int], classes: int</em><span class="sig-paren">)</span> &#x2192; keras.models.Sequential<a class="headerlink" href="#multiscandllib.src.custom_model.custom_model_01" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a custom model formed by 7 blocks.</p>
+<p>Each block contains:</p>
+<ul class="simple">
+<li><p>Conv2D</p></li>
+<li><p>BatchNormalization</p></li>
+<li><p>GaussianNoise</p></li>
+<li><p>MaxPooling2D</p></li>
+</ul>
+<p>After these blocks a classification block is added.</p>
+<dl>
+<dt>Args:</dt><dd><p>input_shape: The input shape (ex: (100, 100, 3))</p>
+<p>classes: Number of classes</p>
+</dd>
+<dt>Returns:</dt><dd><p>model: The created model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.src.custom_model.custom_model_02">
+<code class="sig-prename descclassname">multiscandllib.src.custom_model.</code><code class="sig-name descname">custom_model_02</code><span class="sig-paren">(</span><em class="sig-param">input_shape: Tuple[int, int, int]</em><span class="sig-paren">)</span> &#x2192; keras.models.Sequential<a class="headerlink" href="#multiscandllib.src.custom_model.custom_model_02" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a custom model for binary classification formed by 3 blocks.</p>
+<p>Each block contains:</p>
+<ul class="simple">
+<li><p>Conv2D</p></li>
+<li><p>MaxPooling2D</p></li>
+</ul>
+<p>After these blocks a classification block is added.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>input_shape: The input shape (ex: (100, 100, 3))</p>
+</dd>
+<dt>Returns:</dt><dd><p>model: The created model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.src.custom_model.get_model">
+<code class="sig-prename descclassname">multiscandllib.src.custom_model.</code><code class="sig-name descname">get_model</code><span class="sig-paren">(</span><em class="sig-param">input_shape: Tuple[int, int, int], classes: int</em><span class="sig-paren">)</span> &#x2192; keras.models.Sequential<a class="headerlink" href="#multiscandllib.src.custom_model.get_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-multiscandllib.src.data_generator">
+<span id="multiscandllib-src-data-generator-module"></span><h2>multiscandllib.src.data_generator module<a class="headerlink" href="#module-multiscandllib.src.data_generator" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-data_generator"></span><dl class="class">
+<dt id="multiscandllib.src.data_generator.DataGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">multiscandllib.src.data_generator.</code><code class="sig-name descname">DataGenerator</code><span class="sig-paren">(</span><em class="sig-param">image_filenames: List[str], labels: List[int], batch_size: int, width_shift_range: float = 0</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.src.data_generator.DataGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">keras.utils.Sequence</span></code></p>
+<p>Class Data Generator for Keras.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-multiscandllib.src.get_dataset">
+<span id="multiscandllib-src-get-dataset-module"></span><h2>multiscandllib.src.get_dataset module<a class="headerlink" href="#module-multiscandllib.src.get_dataset" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-get_dataset"></span><dl class="function">
+<dt id="multiscandllib.src.get_dataset.get_dataset">
+<code class="sig-prename descclassname">multiscandllib.src.get_dataset.</code><code class="sig-name descname">get_dataset</code><span class="sig-paren">(</span><em class="sig-param">dataset_path: pathlib.Path</em>, <em class="sig-param">percent_train: int = 80</em>, <em class="sig-param">percent_val: int = 10</em>, <em class="sig-param">percent_test: int = 10</em>, <em class="sig-param">classes: List[str] = None</em><span class="sig-paren">)</span> &#x2192; Sequence[Tuple[List[str], List[int], List[str], List[int], List[str], List[int]]]<a class="headerlink" href="#multiscandllib.src.get_dataset.get_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets filename and label lists of samples.</p>
+<dl>
+<dt>Args:</dt><dd><p>percent_train: (default 80)</p>
+<p>percent_val: (default 10)</p>
+<p>percent_test: (default 10)</p>
+</dd>
+<dt>Return:</dt><dd><p>training_ds: List of paths to the training dataset</p>
+<p>training_labels: List of labels of the training examples</p>
+<p>val_ds: List of paths to the validation dataset</p>
+<p>val_labels: List of labels of the validation examples</p>
+<p>test_ds: List of paths to the test dataset</p>
+<p>test_labels: List of labels of the test examples</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.src.get_dataset.get_files">
+<code class="sig-prename descclassname">multiscandllib.src.get_dataset.</code><code class="sig-name descname">get_files</code><span class="sig-paren">(</span><em class="sig-param">dataset_path: pathlib.Path, classes: List[str], balanced: bool</em><span class="sig-paren">)</span> &#x2192; Tuple[List[pathlib.Path], List[List[int]]]<a class="headerlink" href="#multiscandllib.src.get_dataset.get_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of files for our dataset.</p>
+<dl>
+<dt>Args:</dt><dd><p>dataset_path: A Path to the folder where the files are stored</p>
+<p>classes: A list of the classes we want to include in our dataset</p>
+<p>balanced: If balanced is set to True, then the number of examples for each class is balanced</p>
+</dd>
+<dt>Return:</dt><dd><p>A randomized list of paths to files with its corresponding labels in categorical format</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.src.get_dataset.load_dataset">
+<code class="sig-prename descclassname">multiscandllib.src.get_dataset.</code><code class="sig-name descname">load_dataset</code><span class="sig-paren">(</span><em class="sig-param">x_files: List[pathlib.Path]</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#multiscandllib.src.get_dataset.load_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the given dataset files in memory</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>x_files: List of paths to dataset</p>
+</dd>
+<dt>Return:</dt><dd><p>Numpy array containing the dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.src.get_dataset.serve_files">
+<code class="sig-prename descclassname">multiscandllib.src.get_dataset.</code><code class="sig-name descname">serve_files</code><span class="sig-paren">(</span><em class="sig-param">files: List[str], labels: List[int], quantity: int</em><span class="sig-paren">)</span> &#x2192; Tuple[List[pathlib.Path], List[List[int]]]<a class="headerlink" href="#multiscandllib.src.get_dataset.serve_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serve example paths and labels using yield, from the given lists.</p>
+<dl>
+<dt>Args:</dt><dd><p>files: List of paths to examples</p>
+<p>labels: List of labels (integer format)</p>
+<p>quantity: Quantity to be served, if quantity is set to 0, yields remaining elements</p>
+</dd>
+<dt>Return:</dt><dd><p>Tuple of lists (files labels) containing the specified quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-multiscandllib.src.plot_graphics">
+<span id="multiscandllib-src-plot-graphics-module"></span><h2>multiscandllib.src.plot_graphics module<a class="headerlink" href="#module-multiscandllib.src.plot_graphics" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-plot_graphics"></span><dl class="function">
+<dt id="multiscandllib.src.plot_graphics.plot_confusion_matrix">
+<code class="sig-prename descclassname">multiscandllib.src.plot_graphics.</code><code class="sig-name descname">plot_confusion_matrix</code><span class="sig-paren">(</span><em class="sig-param">model</em>, <em class="sig-param">batch</em>, <em class="sig-param">labels</em>, <em class="sig-param">classes_names</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">output_folder=None</em>, <em class="sig-param">save_figure=True</em>, <em class="sig-param">show_figure=True</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.src.plot_graphics.plot_confusion_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot confusion matrix.</p>
+<dl>
+<dt>Args:</dt><dd><p>model: Executed model</p>
+<p>batch: Batch of the dataset to execute a validation step</p>
+<p>labels: Labels of the batch</p>
+<p>classes_names: Names of classes to show in the figure</p>
+<p>prefix: Indicate a prefix to save the generated figure</p>
+<p>output_folder: Folder where to save the generated figure</p>
+<p>save_figure: If True the generated figure is saved to disk</p>
+<p>show_figure: If True the figure is show in the screen</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.src.plot_graphics.plot_performance_graphics">
+<code class="sig-prename descclassname">multiscandllib.src.plot_graphics.</code><code class="sig-name descname">plot_performance_graphics</code><span class="sig-paren">(</span><em class="sig-param">history</em>, <em class="sig-param">num_epochs</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">output_folder=None</em>, <em class="sig-param">save_figure=True</em>, <em class="sig-param">show_figure=True</em><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.src.plot_graphics.plot_performance_graphics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot performance graphics of the training.
+Args:</p>
+<blockquote>
+<div><p>history: History log after training a model</p>
+<p>num_epochs: Number of epochs</p>
+<p>prefix: Indicate a prefix to save the generated figure</p>
+<p>output_folder: Folder where to save the generated figure</p>
+<p>save_figure: If True the generated figure is saved to disk</p>
+<p>show_figure: If True the figure is show in the screen</p>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="module-multiscandllib.src.read_arguments">
+<span id="multiscandllib-src-read-arguments-module"></span><h2>multiscandllib.src.read_arguments module<a class="headerlink" href="#module-multiscandllib.src.read_arguments" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-read_arguments"></span><dl class="class">
+<dt id="multiscandllib.src.read_arguments.Argument">
+<em class="property">class </em><code class="sig-prename descclassname">multiscandllib.src.read_arguments.</code><code class="sig-name descname">Argument</code><a class="headerlink" href="#multiscandllib.src.read_arguments.Argument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Enum class to specify the possible fields in the arguments.</p>
+<dl class="attribute">
+<dt id="multiscandllib.src.read_arguments.Argument.BATCH_SIZE">
+<code class="sig-name descname">BATCH_SIZE</code><em class="property"> = 3</em><a class="headerlink" href="#multiscandllib.src.read_arguments.Argument.BATCH_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="multiscandllib.src.read_arguments.Argument.CLASSES">
+<code class="sig-name descname">CLASSES</code><em class="property"> = 5</em><a class="headerlink" href="#multiscandllib.src.read_arguments.Argument.CLASSES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="multiscandllib.src.read_arguments.Argument.DATASET">
+<code class="sig-name descname">DATASET</code><em class="property"> = 1</em><a class="headerlink" href="#multiscandllib.src.read_arguments.Argument.DATASET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="multiscandllib.src.read_arguments.Argument.EPOCHS">
+<code class="sig-name descname">EPOCHS</code><em class="property"> = 4</em><a class="headerlink" href="#multiscandllib.src.read_arguments.Argument.EPOCHS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="multiscandllib.src.read_arguments.Argument.EXAMPLES">
+<code class="sig-name descname">EXAMPLES</code><em class="property"> = 6</em><a class="headerlink" href="#multiscandllib.src.read_arguments.Argument.EXAMPLES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="multiscandllib.src.read_arguments.Argument.LR">
+<code class="sig-name descname">LR</code><em class="property"> = 7</em><a class="headerlink" href="#multiscandllib.src.read_arguments.Argument.LR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="multiscandllib.src.read_arguments.Argument.OUTPUT">
+<code class="sig-name descname">OUTPUT</code><em class="property"> = 2</em><a class="headerlink" href="#multiscandllib.src.read_arguments.Argument.OUTPUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="multiscandllib.src.read_arguments.Argument.PROG">
+<code class="sig-name descname">PROG</code><em class="property"> = 0</em><a class="headerlink" href="#multiscandllib.src.read_arguments.Argument.PROG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="multiscandllib.src.read_arguments.read_arguments">
+<code class="sig-prename descclassname">multiscandllib.src.read_arguments.</code><code class="sig-name descname">read_arguments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#multiscandllib.src.read_arguments.read_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read input arguments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">dataset</span> <span class="o">&lt;</span><span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">dataset</span><span class="o">&gt;</span>
+<span class="o">--</span><span class="n">output</span> <span class="o">&lt;</span><span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">output</span> <span class="n">folder</span><span class="o">&gt;</span> <span class="c1">#The folder is created if not exists</span>
+<span class="o">--</span><span class="n">batch_size</span> <span class="o">&lt;</span><span class="n">desired</span> <span class="n">batch</span> <span class="n">size</span><span class="p">,</span> <span class="n">typically</span> <span class="mi">32</span> <span class="ow">or</span> <span class="mi">64</span><span class="o">&gt;</span>
+<span class="o">--</span><span class="n">epochs</span> <span class="o">&lt;</span><span class="n">num</span> <span class="n">of</span> <span class="n">epochs</span> <span class="n">to</span> <span class="n">perform</span><span class="o">&gt;</span>
+<span class="o">--</span><span class="n">classes</span> <span class="p">[</span><span class="n">Optional</span><span class="p">,</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">classes</span><span class="p">]</span> <span class="c1"># default: folder names</span>
+<span class="o">--</span><span class="n">examples</span> <span class="o">&lt;</span><span class="n">num</span> <span class="n">of</span> <span class="n">examples</span> <span class="n">to</span> <span class="n">employ</span><span class="o">&gt;</span>
+<span class="o">--</span><span class="n">lr</span> <span class="o">&lt;</span><span class="n">learning</span> <span class="n">rate</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Return:</dt><dd><p>A dictionary with the arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-multiscandllib.src">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-multiscandllib.src" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-src"></span></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, E. Parcero
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

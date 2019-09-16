@@ -1,4 +1,8 @@
-"""Data Generation for Keras.
+"""
+.. module:: data_generator
+    :synopsis: custom DataGenerator for Keras
+ 
+.. moduleauthor:: E. Parcero
 """
 import random
 from typing import List, Tuple
@@ -13,6 +17,17 @@ class DataGenerator(Sequence):
 
     def __init__(self, image_filenames: List[str], labels: List[int],
                  batch_size: int, width_shift_range: float = 0):
+        """Initialization method.
+        
+        Args:
+            image_filenames: List of paths to the numpy files of the dataset
+            
+            labels: List of labels for each example
+            
+            batch_size: Batch size
+            
+            width_shift_range: Apply a width shift to the example
+        """
         self.image_filenames, self.labels = image_filenames, labels
         self.batch_size = batch_size
         self.width_shift_range = width_shift_range
@@ -23,12 +38,12 @@ class DataGenerator(Sequence):
         return int(np.ceil(len(self.image_filenames) / float(self.batch_size)))
 
     def __getitem__(self, idx: int) -> Tuple[np.ndarray, List[int]]:
-        """Generates one batch of data
+        """Generates one batch of data.
         """
 
         def _width_shift(img: np.ndarray,
                        transformation_x: float = 0) -> np.ndarray:
-            """Transform image as numpy tensor applyinga width shift.
+            """Transform image as numpy tensor applying a width shift.
             """
             _, width, depth = img.shape
 

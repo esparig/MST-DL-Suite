@@ -1,4 +1,8 @@
-"""Test Data Generator.
+"""
+.. module:: test_data_generator_integration
+    :synopsis: unit testing for core components
+ 
+.. moduleauthor:: E. Parcero
 """
 import random
 from typing import List, Tuple
@@ -34,7 +38,7 @@ class DataGenerator2(Sequence): # Testing purposes
         return int(np.ceil(len(self.image_filenames) / float(self.batch_size)))
 
     def __getitem__(self, idx: int) -> Tuple[np.ndarray, List[int]]:
-        """Generates one batch of data
+        """Generates one batch of data.
         """
         self.store_idx.append(idx) # Testing purposes
 
@@ -73,7 +77,7 @@ class DataGenerator2(Sequence): # Testing purposes
         return result
 
 def test_data_generator():
-    """Test data generator
+    """Test data generator.
     """
     files_training = set(GEN_TRAIN.store_batch)
     files_validation = set(GEN_VAL.store_batch)

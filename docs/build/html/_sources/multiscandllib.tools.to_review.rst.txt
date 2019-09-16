@@ -1,0 +1,158 @@
+multiscandllib.tools.to\_review package
+=======================================
+
+Submodules
+----------
+
+multiscandllib.tools.to\_review.BMPtoJPG module
+-----------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.BMPtoJPG
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.BMPtoPNG module
+-----------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.BMPtoPNG
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.autolabel module
+------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.autolabel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.characteristics\_distribution module
+--------------------------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.characteristics_distribution
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.copy\_examples module
+-----------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.copy_examples
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.create\_dataset\_old module
+-----------------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.create_dataset_old
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.create\_numpy\_int16 module
+-----------------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.create_numpy_int16
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.create\_test\_dataset module
+------------------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.create_test_dataset
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.data\_aug module
+------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.data_aug
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.inspect\_images module
+------------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.inspect_images
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.merge\_category\_folders module
+---------------------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.merge_category_folders
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.mynumpy\_shift module
+-----------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.mynumpy_shift
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.num\_views module
+-------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.num_views
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.plot\_image module
+--------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.plot_image
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.plot\_numpy module
+--------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.plot_numpy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.pretty\_json module
+---------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.pretty_json
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.simple\_shift module
+----------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.simple_shift
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.tools.to\_review.test\_shift module
+--------------------------------------------------
+
+.. automodule:: multiscandllib.tools.to_review.test_shift
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: multiscandllib.tools.to_review
+   :members:
+   :undoc-members:
+   :show-inheritance:

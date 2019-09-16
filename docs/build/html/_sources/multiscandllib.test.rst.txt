@@ -1,0 +1,62 @@
+multiscandllib.test package
+===========================
+
+Submodules
+----------
+
+multiscandllib.test.get\_dataset\_test module
+---------------------------------------------
+
+.. automodule:: multiscandllib.test.get_dataset_test
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.test.imports\_test module
+----------------------------------------
+
+.. automodule:: multiscandllib.test.imports_test
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.test.model\_test module
+--------------------------------------
+
+.. automodule:: multiscandllib.test.model_test
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.test.plot\_graphics\_test module
+-----------------------------------------------
+
+.. automodule:: multiscandllib.test.plot_graphics_test
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.test.test\_data\_generator\_integration module
+-------------------------------------------------------------
+
+.. automodule:: multiscandllib.test.test_data_generator_integration
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+multiscandllib.test.test\_data\_generator\_rescale module
+---------------------------------------------------------
+
+.. automodule:: multiscandllib.test.test_data_generator_rescale
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: multiscandllib.test
+   :members:
+   :undoc-members:
+   :show-inheritance:

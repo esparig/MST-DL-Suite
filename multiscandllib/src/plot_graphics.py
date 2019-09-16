@@ -1,6 +1,8 @@
 """
-Plot performance graphics
-
+.. module:: plot_graphics
+    :synopsis: plot performance graphics
+ 
+.. moduleauthor:: E. Parcero
 """
 import os
 import matplotlib.pyplot as plt
@@ -12,7 +14,19 @@ from sklearn.metrics import confusion_matrix
 
 def plot_performance_graphics(history, num_epochs, prefix="",
                               output_folder=None, save_figure=True, show_figure=True):
-    """Plot performance graphics of the trainig
+    """Plot performance graphics of the training.
+    Args:
+        history: History log after training a model
+        
+        num_epochs: Number of epochs
+        
+        prefix: Indicate a prefix to save the generated figure
+        
+        output_folder: Folder where to save the generated figure
+        
+        save_figure: If True the generated figure is saved to disk
+        
+        show_figure: If True the figure is show in the screen
     """
 
     plt.figure(0)
@@ -53,7 +67,25 @@ def plot_performance_graphics(history, num_epochs, prefix="",
 
 def plot_confusion_matrix(model, batch, labels, classes_names, prefix="",
                           output_folder=None, save_figure=True, show_figure=True):
-    """Plot confusion matrix
+    """Plot confusion matrix.
+    
+    Args:
+        model: Executed model
+        
+        batch: Batch of the dataset to execute a validation step
+        
+        labels: Labels of the batch
+        
+        classes_names: Names of classes to show in the figure
+        
+        prefix: Indicate a prefix to save the generated figure
+        
+        output_folder: Folder where to save the generated figure
+        
+        save_figure: If True the generated figure is saved to disk
+        
+        show_figure: If True the figure is show in the screen
+        
     """
     # print(type(batch)) # <class 'numpy.ndarray'> | <class 'src.data_generator.DataGenerator'>
     if isinstance(batch, np.ndarray):
