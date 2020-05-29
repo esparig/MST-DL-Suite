@@ -1,7 +1,7 @@
-# MST-DL-Suite
-## Deep Learning tools for Multiscan Technologies
+# DL-Suite
+## Deep Learning tools for MST
 ### multiscandllib/scripts/
-This module contains scripts calling the multicandllib for training/models tests and folders containing the test results.
+This module contains scripts calling the multiscandllib for training/models tests and folders containing the test results.
 
 ### multiscandllib/src/
 This module contains the source code of our DL library, organized as follows:
